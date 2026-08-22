@@ -478,55 +478,33 @@ row.style.display="none";
 
 );
 
-
-
-
-
+// ===============================
+// SELECT CUSTOMER ROW
+// ===============================
 
 // ===============================
 // SELECT CUSTOMER ROW
 // ===============================
 
+document.querySelector("#customerTable tbody")
+.addEventListener("click", function(e){
 
-document.querySelector(
+    let row = e.target.closest("tr");
 
-"#customerTable tbody"
+    if(!row){
+        return;
+    }
 
-)
+    selectedIndex = Number(row.dataset.index);
 
-.addEventListener(
+    // Mobile: Show / Hide details
+    if(window.innerWidth <= 600){
 
-"click",
+        row.classList.toggle("mobile-open");
 
-function(e){
+    }
 
-
-let row =
-
-e.target.closest("tr");
-
-
-
-if(!row){
-
-return;
-
-}
-
-
-
-selectedIndex =
-
-Number(row.dataset.index);
-
-
-
-}
-
-);
-
-
-
+});
 
 
 // ===============================
