@@ -748,3 +748,25 @@ body {
 
 
 
+/* =========================
+   MOBILE CUSTOMER VIEW
+   ========================= */
+
+@media (max-width: 600px) {
+
+    #customerTable {
+        min-width: 100%;
+        width: 100%;
+    }
+
+    #customerTable th,
+    #customerTable td {
+        padding: 7px 5px;
+        font-size: 11px;
+    }
+
+}
+
+
+
+
