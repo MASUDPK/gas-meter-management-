@@ -1,1 +1,658 @@
+/* =========================================
+   Jamila Bhavan
+   Gas Meter Management System
+   style.css
+   ========================================= */
 
+/* =========================
+   GLOBAL
+   ========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #f5f7fa;
+    color: #333;
+    min-height: 100vh;
+}
+
+/* =========================
+   HEADER
+   ========================= */
+
+.header {
+    width: 100%;
+    background: #0f766e;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.20);
+}
+
+.logo {
+    flex: 1;
+    min-width: 250px;
+}
+
+.logo h1 {
+    font-size: 32px;
+    margin-bottom: 5px;
+}
+
+.logo p {
+    font-size: 18px;
+}
+
+.logo span {
+    display: block;
+    margin-top: 8px;
+    color: #d1fae5;
+    font-size: 14px;
+}
+
+.logo i {
+    font-size: 45px;
+    margin-bottom: 10px;
+}
+
+.monthBox {
+    display: flex;
+    flex-direction: column;
+    min-width: 180px;
+}
+
+.monthBox label {
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.monthBox input {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+}
+
+/* =========================
+   DASHBOARD
+   ========================= */
+
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    padding: 10px;
+}
+
+.card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 12px 8px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+.card i {
+    font-size: 22px;
+    margin-bottom: 5px;
+    color: #0f766e;
+}
+
+.card h3 {
+    font-size: 12px;
+    margin: 5px 0;
+}
+
+.card h2 {
+    font-size: 20px;
+    margin: 5px 0;
+    color: #111827;
+}
+
+/* =========================
+   QUICK MENU
+   ========================= */
+
+.menu {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 8px;
+    padding: 10px;
+}
+
+.menu button {
+    border: none;
+    border-radius: 8px;
+    padding: 12px 8px;
+    font-size: 13px;
+    cursor: pointer;
+    background: #0f766e;
+    color: white;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+    transition: 0.2s;
+}
+
+.menu button:hover {
+    background: #115e59;
+    transform: translateY(-2px);
+}
+
+.menu i {
+    margin-right: 5px;
+}
+
+/* =========================
+   SEARCH
+   ========================= */
+
+.searchBox {
+    padding: 20px;
+}
+
+.searchBox input {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #0f766e;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
+    background: white;
+}
+
+.searchBox input:focus {
+    box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.15);
+}
+
+/* =========================
+   TABLE
+   ========================= */
+
+.tableSection {
+    padding: 20px;
+    overflow-x: auto;
+}
+
+#customerTable {
+    width: 100%;
+    min-width: 1050px;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+#customerTable thead {
+    background: #0f766e;
+    color: #fff;
+}
+
+#customerTable th,
+#customerTable td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+    white-space: nowrap;
+}
+
+#customerTable tbody tr:nth-child(even) {
+    background: #f7f7f7;
+}
+
+#customerTable tbody tr:hover {
+    background: #e0f2fe;
+}
+
+/* =========================
+   TABLE BUTTONS
+   ========================= */
+
+#customerTable button {
+    border: none;
+    padding: 6px 9px;
+    margin: 2px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: white;
+    font-size: 12px;
+}
+
+#customerTable button:hover {
+    opacity: 0.85;
+}
+
+/* =========================
+   STATUS
+   ========================= */
+
+.status-paid {
+    color: #15803d;
+    font-weight: bold;
+}
+
+.status-due {
+    color: #dc2626;
+    font-weight: bold;
+}
+
+/* =========================
+   MODAL
+   ========================= */
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.45);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    padding: 15px;
+}
+
+.modal-content {
+    width: 95%;
+    max-width: 650px;
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: popup 0.30s ease;
+}
+
+@keyframes popup {
+    from {
+        opacity: 0;
+        transform: scale(0.90);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* =========================
+   CLOSE BUTTON
+   ========================= */
+
+.close,
+.paymentClose,
+.reportClose {
+    float: right;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #777;
+}
+
+.close:hover,
+.paymentClose:hover,
+.reportClose:hover {
+    color: red;
+}
+
+/* =========================
+   MODAL TITLE
+   ========================= */
+
+.modal-content h2 {
+    margin-bottom: 20px;
+    color: #0f766e;
+    text-align: center;
+}
+
+/* =========================
+   FORM
+   ========================= */
+
+.modal-content label {
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.modal-content input,
+.modal-content select,
+.modal-content textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    background: #fff;
+}
+
+.modal-content input:focus,
+.modal-content select:focus,
+.modal-content textarea:focus {
+    border: 2px solid #0f766e;
+}
+
+/* =========================
+   READONLY INPUT
+   ========================= */
+
+.modal-content input[readonly] {
+    background: #f3f4f6;
+    color: #555;
+}
+
+/* =========================
+   MODAL BUTTONS
+   ========================= */
+
+.modalButtons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.modalButtons button {
+    flex: 1;
+    min-width: 100px;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.30s;
+}
+
+/* SAVE */
+
+#saveBtn {
+    background: #0f766e;
+    color: white;
+}
+
+#saveBtn:hover {
+    background: #115e59;
+}
+
+/* CANCEL */
+
+#cancelBtn,
+#paymentCancel,
+#reportCancel {
+    background: #ef4444;
+    color: white;
+}
+
+#cancelBtn:hover,
+#paymentCancel:hover,
+#reportCancel:hover {
+    background: #dc2626;
+}
+
+/* UPDATE */
+
+#updateBtn {
+    background: #2563eb;
+    color: white;
+}
+
+#updateBtn:hover {
+    background: #1d4ed8;
+}
+
+/* DELETE */
+
+#deleteBtn {
+    background: #dc2626;
+    color: white;
+}
+
+#deleteBtn:hover {
+    background: #b91c1c;
+}
+
+/* =========================
+   PAYMENT FORM
+   ========================= */
+
+#paymentForm button[type="submit"] {
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#paymentForm button[type="submit"]:hover {
+    background: #1d4ed8;
+}
+
+/* =========================
+   REPORT
+   ========================= */
+
+.reportArea {
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.reportArea h3 {
+    text-align: center;
+    color: #0f766e;
+    margin-bottom: 10px;
+}
+
+.reportArea p {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* =========================
+   REPORT TABLE
+   ========================= */
+
+.reportArea table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.reportArea table th,
+.reportArea table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.reportArea table th {
+    background: #0f766e;
+    color: white;
+}
+
+.reportArea table tr:nth-child(even) {
+    background: #f7f7f7;
+}
+
+/* =========================
+   PDF / REPORT BUTTON
+   ========================= */
+
+#exportPDF {
+    background: #dc2626;
+    color: white;
+}
+
+#exportPDF:hover {
+    background: #b91c1c;
+}
+
+/* =========================
+   BILL AREA
+   ========================= */
+
+#billArea {
+    margin: 20px;
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+}
+
+#billArea h2 {
+    text-align: center;
+    color: #0f766e;
+    margin-bottom: 20px;
+}
+
+#billContent {
+    min-height: 250px;
+    border: 2px dashed #0f766e;
+    padding: 20px;
+    border-radius: 10px;
+    background: #ffffff;
+}
+
+/* =========================
+   FOOTER
+   ========================= */
+
+.footer {
+    margin-top: 30px;
+    padding: 20px;
+    text-align: center;
+    background: #0f766e;
+    color: white;
+}
+
+.footer p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+   ========================= */
+
+@media (max-width: 600px) {
+
+    .header {
+        padding: 15px;
+    }
+
+    .logo {
+        text-align: center;
+    }
+
+    .logo h1 {
+        font-size: 24px;
+    }
+
+    .logo p {
+        font-size: 15px;
+    }
+
+    .logo span {
+        font-size: 12px;
+    }
+
+    .logo i {
+        font-size: 38px;
+    }
+
+    .monthBox {
+        width: 100%;
+    }
+
+    .monthBox input {
+        width: 100%;
+    }
+
+    .dashboard {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card h2 {
+        font-size: 18px;
+    }
+
+    .searchBox {
+        padding: 10px;
+    }
+
+    .tableSection {
+        padding: 10px;
+    }
+
+    .modal {
+        padding: 8px;
+    }
+
+    .modal-content {
+        width: 100%;
+        padding: 18px;
+        max-height: 95vh;
+    }
+
+    .modalButtons {
+        flex-direction: column;
+    }
+
+    .modalButtons button {
+        width: 100%;
+    }
+
+    .footer {
+        font-size: 12px;
+    }
+}
+
+/* =========================
+   VERY SMALL MOBILE
+   ========================= */
+
+@media (max-width: 380px) {
+
+    .dashboard {
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+    }
+
+    .card {
+        padding: 8px 4px;
+    }
+
+    .card h3 {
+        font-size: 11px;
+    }
+
+    .card h2 {
+        font-size: 16px;
+    }
+
+    .menu {
+        grid-template-columns: 1fr 1fr;
+    }
+}
