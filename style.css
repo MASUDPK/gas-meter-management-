@@ -190,7 +190,7 @@ body {
 #customerTable {
     width: 100%;
     min-width: 1050px;
-    border-collapse: separate;
+    border-collapse: collapse;
     background: #fff;
     border-radius: 12px;
     overflow: hidden;
