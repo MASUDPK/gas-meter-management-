@@ -495,14 +495,15 @@ document.querySelector("#customerTable tbody")
         return;
     }
 
-    selectedIndex = Number(row.dataset.index);
+   selectedIndex = Number(row.dataset.index);
 
-    // Mobile: Show / Hide details
-    if(window.innerWidth <= 600){
+if(window.innerWidth <= 600){
 
-        row.classList.toggle("mobile-open");
+    return;
 
-    }
+}
+
+let customer = customers[selectedIndex];
 
 });
 
