@@ -915,4 +915,26 @@ body {
     cursor: pointer;
 }
 
+/* ===============================
+   MOBILE CUSTOMER TABLE SCROLL
+   =============================== */
 
+@media (max-width: 600px) {
+
+    .tableSection {
+        max-height: 330px;
+        overflow-y: auto;
+        overflow-x: auto;
+    }
+
+    #customerTable {
+        min-width: 1100px;
+    }
+
+    #customerTable thead {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+    }
+
+}
