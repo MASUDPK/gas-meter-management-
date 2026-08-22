@@ -891,29 +891,9 @@ body {
     }
 
 }
-/* =========================
-   MOBILE SHOW ONLY 3 ROWS
-   ========================= */
 
-@media (max-width: 600px) {
 
-    #customerTable tbody tr:nth-child(n+4) {
-        display: none;
-    }
 
-}
-
-#showAllBtn {
-    display: block;
-    margin: 10px auto;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    background: #0f766e;
-    color: white;
-    font-size: 14px;
-    cursor: pointer;
-}
 
 /* ===============================
    MOBILE CUSTOMER TABLE SCROLL
