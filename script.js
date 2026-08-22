@@ -901,7 +901,9 @@ return;
 
 selectedIndex = Number(row.dataset.index);
 
-
+if(window.innerWidth <= 600){
+    return;
+}
 
 let customer = customers[selectedIndex];
 
