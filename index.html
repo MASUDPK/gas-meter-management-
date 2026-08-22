@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Jamila Bhavan - Gas Meter Management System</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<!-- ===========================
+HEADER
+=========================== -->
+
+<header class="header">
+
+<div class="logo">
+
+<i class="fas fa-building"></i>
+
+<h1>Jamila Bhavan-1</h1>
+
+<p>Gas Meter Management System</p>
+
+<span>Model City, Mouchak, Kaliakair, Gazipur</span>
+
+</div>
+
+<div class="monthBox">
+
+<label>Billing Month</label>
+
+<input type="month" id="billingMonth">
+
+</div>
+
+</header>
+
+<!-- ===========================
+DASHBOARD
+=========================== -->
+
+<section class="dashboard">
+
+<div class="card">
+
+<i class="fas fa-home"></i>
+
+<h3>Total Flats</h3>
+
+<h2 id="totalFlat">28</h2>
+
+</div>
+
+<div class="card">
+
+<i class="fas fa-fire"></i>
+
+<h3>Total Unit</h3>
+
+<h2 id="totalUnit">0</h2>
+
+</div>
+
+<div class="card">
+
+<i class="fas fa-money-bill-wave"></i>
+
+<h3>Total Bill</h3>
+
+<h2 id="totalBill">0</h2>
+
+</div>
+
+<div class="card">
+
+<i class="fas fa-check-circle"></i>
+
+<h3>Paid</h3>
+
+<h2 id="paidBill">0</h2>
+
+</div>
+
+<div class="card">
+
+<i class="fas fa-exclamation-circle"></i>
+
+<h3>Due</h3>
+
+<h2 id="dueBill">0</h2>
+
+</div>
+
+</section>
+
+<!-- ===========================
+QUICK MENU
+=========================== -->
+
+<section class="menu">
+
+<button id="addCustomerBtn">
+
+<i class="fas fa-user-plus"></i>
+
+New Entry
+
+</button>
+
+<button id="paymentBtn">
+
+<i class="fas fa-wallet"></i>
+
+Payment
+
+</button>
+
+<button id="reportBtn">
+
+<i class="fas fa-chart-bar"></i>
+
+Report
+
+</button>
+
+<button id="printBtn">
+
+<i class="fas fa-print"></i>
+
+Print
+
+</button>
+
+</section>
+
+<!-- ===========================
+SEARCH
+=========================== -->
+
+<section class="searchBox">
+
+<input
+
+type="text"
+
+id="searchBox"
+
+placeholder="Search Flat / Customer">
+
+</section>
+
+<!-- ===========================
+CUSTOMER TABLE
+=========================== -->
+
+<section class="tableSection">
+
+<table id="customerTable">
+
+<thead>
+<!-- ===========================
+Customer Table Header (Final)
+=========================== -->
+
+<tr>
+
+<th>Flat</th>
+
+<th>Meter No</th>
+
+<th>Customer</th>
+
+<th>Mobile</th>
+
+<th>Previous</th>
+
+<th>Current</th>
+
+<th>Unit</th>
+
+<th>Bill</th>
+
+<th>Paid</th>
+
+<th>Due</th>
+
+<th>Status</th>
+
+<th>Action</th>
+
+</tr>
+
+<!-- ===========================
+End Customer Table Header
+=========================== -->
+
+
+
+
+</thead>
+
+<tbody>
+
+</tbody>
+
+</table>
+
+</section>
+
+<!-- ===========================
+ENTRY MODAL
+=========================== -->
+
+<div id="entryModal" class="modal">
+
+<div class="modal-content">
+
+<span class="close">&times;</span>
+
+<h2>Gas Meter Entry</h2>
+
+<form id="entryForm">
+
+<label>Flat Number</label>
+
+<select id="flatNo"></select>
+
+<label>Meter Number</label>
+
+<input
+type="text"
+id="meterNo"
+readonly>
+
+<label>Customer Name</label>
+
+<input
+type="text"
+id="customerName">
+
+<label>Mobile Number</label>
+
+<input
+type="text"
+id="mobileNumber">
+
+<label>Previous Reading</label>
+
+<input
+type="number"
+id="previousReading">
+
+<label>Current Reading</label>
+
+<input
+type="number"
+id="currentReading">
+
+
+<label>Gas Rate</label>
+
+<input
+type="number"
+id="gasRate">
+
+<label>Service Charge</label>
+
+<input
+type="number"
+id="serviceCharge">
+
+<label>Previous Due</label>
+
+<input
+type="number"
+id="previousDue">
+
+<label>Discount</label>
+
+<input
+type="number"
+id="discount">
+
+<label>Late Fee</label>
+
+<input
+type="number"
+id="lateFee">
+
+<label>Total Bill</label>
+
+<input
+type="number"
+id="totalAmount"
+readonly>
+
+<label>Received Amount</label>
+
+<input
+type="number"
+id="receivedAmount">
+
+<label>Current Due</label>
+
+<input
+type="number"
+id="currentDue"
+readonly>
+
+<label>Reading Date</label>
+
+<input
+type="date"
+id="readingDate">
+
+<label>Remarks</label>
+
+<textarea
+id="remarks"
+rows="3"></textarea>
+
+<div class="modalButtons">
+
+<button
+type="submit"
+id="saveBtn">
+
+<i class="fas fa-save"></i>
+
+Save
+
+</button>
+
+<button
+type="button"
+id="cancelBtn">
+
+Cancel
+
+</button>
+<button type="button" id="updateBtn">
+Update
+</button>
+
+<button type="button" id="deleteBtn">
+Delete
+</button>
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+<!-- ===========================
+PAYMENT MODAL
+=========================== -->
+
+
+<!--
+<h2>
+
+Payment Entry
+
+</h2>-->
+<!-- ===========================
+PAYMENT MODAL
+=========================== -->
+
+
+<div id="paymentModal" class="modal">
+
+<div class="modal-content">
+
+<span class="paymentClose">&times;</span>
+
+<h2>Payment Entry</h2>
+
+<form id="paymentForm">
+
+<label>Flat Number</label>
+<select id="paymentFlat"></select>
+
+
+<label>Customer Name</label>
+<input type="text" id="paymentCustomer" readonly>
+
+
+<label>Total Due</label>
+<input type="number" id="paymentDue" readonly>
+
+
+<label>Payment Amount</label>
+<input type="number" id="paymentAmount">
+
+
+<label>Payment Date</label>
+<input type="date" id="paymentDate">
+
+
+<label>Payment Method</label>
+<select id="paymentMethod">
+
+<option value="Cash">Cash</option>
+<option value="Bank">Bank</option>
+<option value="Mobile Banking">
+Mobile Banking
+</option>
+
+</select>
+
+
+<label>Remarks</label>
+
+<textarea id="paymentRemarks" rows="3"></textarea>
+
+
+<div class="modalButtons">
+
+<button type="submit">
+
+<i class="fas fa-check"></i>
+
+Save Payment
+
+</button>
+
+
+<button type="button" id="paymentCancel">
+
+Cancel
+
+</button>
+
+</div>
+
+
+</form>
+
+</div>
+
+</div>
+
+<!--<label>Total Due</label>
+
+<input 
+type="number"
+id="paymentDue"
+readonly>
+
+
+<label>Payment Amount</label>
+
+<input 
+type="number"
+id="paymentAmount">
+
+
+<label>Payment Date</label>
+
+<input 
+type="date"
+id="paymentDate">
+
+
+<label>Payment Method</label>
+
+<select id="paymentMethod">
+
+<option value="Cash">Cash</option>
+
+<option value="Bank">Bank</option>
+
+<option value="Mobile Banking">
+Mobile Banking
+</option>
+
+</select>
+
+
+<label>Remarks</label>
+
+<textarea
+id="paymentRemarks"
+rows="3">
+</textarea>
+
+
+<div class="modalButtons">
+
+<button type="submit">
+
+<i class="fas fa-check"></i>
+
+Save Payment
+
+</button>
+
+
+<button 
+type="button"
+id="paymentCancel">
+
+Cancel
+
+</button>
+
+</div>
+
+
+</form>
+
+</div>
+
+</div>
+
+-->
+
+<!-- ===========================
+REPORT MODAL
+=========================== -->
+
+
+<div id="reportModal" class="modal">
+
+
+<div class="modal-content">
+
+
+<span class="reportClose">&times;</span>
+
+
+<h2>Monthly Report</h2>
+
+
+<div class="reportArea">
+
+
+<h3>
+Jamila Bhavan
+</h3>
+
+
+<p>
+Billing Month:
+<span id="reportMonth"></span>
+</p>
+
+
+<table>
+
+
+<tr>
+
+<th>Total Flat</th>
+
+<td id="reportFlat">
+28
+</td>
+
+</tr>
+
+
+<tr>
+
+<th>Total Unit</th>
+
+<td id="reportUnit">
+0
+</td>
+
+</tr>
+
+
+<tr>
+
+<th>Total Bill</th>
+
+<td id="reportBill">
+0
+</td>
+
+</tr>
+
+
+<tr>
+
+<th>Total Paid</th>
+
+<td id="reportPaid">
+0
+</td>
+
+</tr>
+
+
+<tr>
+
+<th>Total Due</th>
+
+<td id="reportDue">
+0
+</td>
+
+</tr>
+
+
+</table>
+
+
+</div>
+
+
+<div class="modalButtons">
+
+
+<button id="exportPDF">
+
+<i class="fas fa-file-pdf"></i>
+
+Save PDF
+
+</button>
+
+
+<button 
+type="button"
+id="reportCancel">
+
+Close
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<!-- ===========================
+FOOTER
+=========================== -->
+
+
+<footer class="footer">
+
+
+<p>
+© 2026 Jamila Bhavan - Gas Meter Management System
+</p>
+
+
+<p>
+Developed by Rezaul Haque
+</p>
+
+
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="script.js"></script>
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="script.js"></script>
+
+
+</body>
+
+</html>
