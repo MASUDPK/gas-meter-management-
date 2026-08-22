@@ -972,6 +972,74 @@ body {
     }
 
 }
+/* ===============================
+   FINAL MOBILE TABLE FIX
+   =============================== */
 
+@media (max-width: 600px) {
+
+    .tableSection {
+        width: 100%;
+        height: 280px;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        padding: 5px;
+    }
+
+    #customerTable {
+        display: table !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        table-layout: fixed;
+        border-collapse: collapse !important;
+    }
+
+    #customerTable thead {
+        display: table-header-group !important;
+    }
+
+    #customerTable tbody {
+        display: table-row-group !important;
+    }
+
+    #customerTable tr {
+        display: table-row !important;
+    }
+
+    #customerTable th,
+    #customerTable td {
+        display: table-cell !important;
+        font-size: 11px;
+        padding: 8px 3px;
+        white-space: normal;
+        text-align: center;
+    }
+
+    /* Mobile-এ শুধু প্রয়োজনীয় ৫টি কলাম */
+    #customerTable th:nth-child(2),
+    #customerTable td:nth-child(2),
+    #customerTable th:nth-child(4),
+    #customerTable td:nth-child(4),
+    #customerTable th:nth-child(5),
+    #customerTable td:nth-child(5),
+    #customerTable th:nth-child(6),
+    #customerTable td:nth-child(6),
+    #customerTable th:nth-child(8),
+    #customerTable td:nth-child(8),
+    #customerTable th:nth-child(9),
+    #customerTable td:nth-child(9) {
+        display: none !important;
+    }
+
+    /* Header স্থির */
+    #customerTable thead th {
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 20 !important;
+        background: #0f766e !important;
+        color: white !important;
+    }
+
+}
 
 
