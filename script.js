@@ -3126,6 +3126,91 @@ if(showAllBtn){
     };
 
 }
+
+
+// ===============================
+// MOBILE UPDATE CUSTOMER
+// ===============================
+
+const updateCustomerBtn =
+    document.getElementById("updateCustomerBtn");
+
+if(updateCustomerBtn){
+
+    updateCustomerBtn.onclick = function(){
+
+        let flat = prompt(
+            "Enter Flat Number (Example: A-2)"
+        );
+
+        if(!flat){
+            return;
+        }
+
+        flat = flat.trim().toUpperCase();
+
+        let index = customers.findIndex(
+            c => c.flat.toUpperCase() === flat
+        );
+
+        if(index === -1){
+
+            alert("Flat Not Found");
+
+            return;
+        }
+
+        selectedIndex = index;
+
+        let customer = customers[index];
+
+        document.getElementById("flatNo").value =
+            customer.flat;
+
+        document.getElementById("meterNo").value =
+            customer.meter;
+
+        document.getElementById("customerName").value =
+            customer.name || "";
+
+        document.getElementById("mobileNumber").value =
+            customer.mobile || "";
+
+        document.getElementById("previousReading").value =
+            customer.previous || 0;
+
+        document.getElementById("currentReading").value =
+            customer.current || 0;
+
+        document.getElementById("gasRate").value =
+            GAS_RATE;
+
+        document.getElementById("serviceCharge").value =
+            SERVICE_CHARGE;
+
+        document.getElementById("totalAmount").value =
+            customer.bill || 0;
+
+        document.getElementById("receivedAmount").value =
+            customer.paid || 0;
+
+        document.getElementById("currentDue").value =
+            customer.due || 0;
+
+        document.getElementById("entryModal")
+            .style.display = "flex";
+
+    };
+
+}
+
+
+
+
+
+
+
+
 // ==================================================
 // END: WhatsApp Customer Due Message Feature
 // এই অংশের নিচে আর কিছু যোগ করার দরকার নেই
