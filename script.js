@@ -330,7 +330,7 @@ tableBody.innerHTML += `
 
 <button
 class="sendBtn"
-onclick="event.stopPropagation(); sendCustomerWhatsApp(${index})"
+onclick="event.stopPropagation(); sendCustomerWhatsApp(${index})">
 
 <i class="fab fa-whatsapp"></i>
 
