@@ -3086,6 +3086,48 @@ document.querySelector("#customerTable tbody")
     row.after(detailsRow);
 
 });
+
+// ===============================
+// MOBILE SHOW ALL CUSTOMERS
+// ===============================
+
+const showAllBtn =
+    document.getElementById("showAllBtn");
+
+if(showAllBtn){
+
+    showAllBtn.onclick = function(){
+
+        const rows =
+            document.querySelectorAll(
+                "#customerTable tbody tr"
+            );
+
+        const hidden =
+            rows[3] &&
+            getComputedStyle(rows[3]).display === "none";
+
+        rows.forEach((row, index) => {
+
+            if(index >= 3){
+
+                row.style.display =
+                    hidden ? "" : "none";
+
+            }
+
+        });
+
+        showAllBtn.innerText =
+            hidden
+            ? "▲ Show Less"
+            : "▼ Show All Customers";
+
+    };
+
+}
+
+
 // ==================================================
 // END: WhatsApp Customer Due Message Feature
 // এই অংশের নিচে আর কিছু যোগ করার দরকার নেই
