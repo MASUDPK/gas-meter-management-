@@ -3014,7 +3014,75 @@ window.open(whatsappURL, "_blank");
 }
 
 
+// ===============================
+// MOBILE CUSTOMER DETAILS
+// ===============================
 
+document.querySelector("#customerTable tbody")
+.addEventListener("click", function(e){
+
+    if(window.innerWidth > 600){
+        return;
+    }
+
+    let row = e.target.closest("tr");
+
+    if(!row){
+        return;
+    }
+
+    let index = Number(row.dataset.index);
+
+    let oldDetails =
+        row.nextElementSibling;
+
+    if(
+        oldDetails &&
+        oldDetails.classList.contains("mobile-details")
+    ){
+
+        oldDetails.remove();
+
+        return;
+    }
+
+    let customer = customers[index];
+
+    let detailsRow =
+        document.createElement("tr");
+
+    detailsRow.className =
+        "mobile-details";
+
+    detailsRow.innerHTML = `
+
+        <td colspan="6">
+
+            <div class="mobile-detail-box">
+
+                <div>Meter: ${customer.meter}</div>
+
+                <div>Mobile: ${customer.mobile || "-"}</div>
+
+                <div>Previous: ${customer.previous}</div>
+
+                <div>Current: ${customer.current}</div>
+
+                <div>Bill: ${Number(customer.bill || 0).toFixed(2)}</div>
+
+                <div>Paid: ${Number(customer.paid || 0).toFixed(2)}</div>
+
+                <div>Status: ${customer.status}</div>
+
+            </div>
+
+        </td>
+
+    `;
+
+    row.after(detailsRow);
+
+});
 // ==================================================
 // END: WhatsApp Customer Due Message Feature
 // এই অংশের নিচে আর কিছু যোগ করার দরকার নেই
