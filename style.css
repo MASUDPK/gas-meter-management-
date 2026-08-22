@@ -767,6 +767,41 @@ body {
 
 }
 
+/* =========================
+   MOBILE COMPACT CUSTOMER TABLE
+   ========================= */
 
+@media (max-width: 600px) {
+
+    /* Hide detailed columns initially */
+    #customerTable th:nth-child(2),
+    #customerTable td:nth-child(2),
+
+    #customerTable th:nth-child(4),
+    #customerTable td:nth-child(4),
+
+    #customerTable th:nth-child(5),
+    #customerTable td:nth-child(5),
+
+    #customerTable th:nth-child(6),
+    #customerTable td:nth-child(6),
+
+    #customerTable th:nth-child(8),
+    #customerTable td:nth-child(8),
+
+    #customerTable th:nth-child(9),
+    #customerTable td:nth-child(9) {
+
+        display: none;
+
+    }
+
+    #customerTable th,
+    #customerTable td {
+        padding: 8px 5px;
+        font-size: 11px;
+    }
+
+}
 
 
