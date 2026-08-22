@@ -3100,11 +3100,11 @@ if(showAllBtn){
 
         const rows =
             document.querySelectorAll(
-                "#customerTable tbody tr"
+                "#customerTable tbody tr[data-index]"
             );
 
-        const hidden =
-            rows[3] &&
+        const isHidden =
+            rows.length > 3 &&
             getComputedStyle(rows[3]).display === "none";
 
         rows.forEach((row, index) => {
@@ -3112,21 +3112,20 @@ if(showAllBtn){
             if(index >= 3){
 
                 row.style.display =
-                    hidden ? "" : "none";
+                    isHidden ? "table-row" : "none";
 
             }
 
         });
 
         showAllBtn.innerText =
-            hidden
+            isHidden
             ? "▲ Show Less"
             : "▼ Show All Customers";
 
     };
 
 }
-
 
 // ==================================================
 // END: WhatsApp Customer Due Message Feature
