@@ -1042,4 +1042,24 @@ body {
 
 }
 
+@media (max-width: 600px) {
 
+    .tableSection {
+        position: relative;
+    }
+
+    #customerTable thead {
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 50 !important;
+    }
+
+    #customerTable thead th {
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 51 !important;
+        background: #0f766e !important;
+        color: #fff !important;
+    }
+
+}
