@@ -556,7 +556,7 @@ body {
    MOBILE RESPONSIVE
    ========================= */
 
-@media (max-width: 600px) {
+
 
     /* =========================
        COMPACT MOBILE HEADER
@@ -627,13 +627,14 @@ body {
        SEARCH
        ========================= */
 
-    .searchBox {
-        padding: 10px;
-    }
+.searchBox {
+    padding: 8px;
+}
 
-    .tableSection {
-        padding: 10px;
-    }
+.tableSection {
+    padding: 8px;
+    width: 100%;
+}
 
     .modal {
         padding: 8px;
