@@ -1833,41 +1833,96 @@ return report;
 
 
 document.getElementById("reportBtn")
+// ===============================
+// REPORT BUTTON
+// ===============================
 
-.onclick=function(){
+document.getElementById("reportBtn").onclick = function () {
+
+    // ===============================
+    // CALCULATE REPORT DATA
+    // ===============================
+
+    let totalUnit = 0;
+    let totalBill = 0;
+    let totalPaid = 0;
+    let totalDue = 0;
+
+    let paidCustomer = 0;
+    let dueCustomer = 0;
+
+    customers.forEach(customer => {
+
+        totalUnit += Number(customer.unit || 0);
+
+        totalBill += Number(customer.bill || 0);
+
+        totalPaid += Number(customer.paid || 0);
+
+        totalDue += Number(customer.due || 0);
+
+        if (Number(customer.due || 0) <= 0) {
+            paidCustomer++;
+        } else {
+            dueCustomer++;
+        }
+
+    });
 
 
+    // ===============================
+    // PUT DATA INTO REPORT TABLE
+    // ===============================
 
-let report = generateReport();
-
-
-
-let content =
-
-document.getElementById("billContent");
+    document.getElementById("reportMonth").innerText =
+        document.getElementById("billingMonth").value || "Not Selected";
 
 
-
-if(content){
-
-
-content.innerHTML =
-
-"<pre>"+report+"</pre>";
+    document.getElementById("reportFlat").innerText =
+        FLATS.length;
 
 
-}
+    document.getElementById("reportUnit").innerText =
+        totalUnit;
 
 
-
-document.getElementById("reportModal")
-
-.style.display="flex";
+    document.getElementById("reportBill").innerText =
+        totalBill.toFixed(2);
 
 
+    document.getElementById("reportPaid").innerText =
+        totalPaid.toFixed(2);
+
+
+    document.getElementById("reportDue").innerText =
+        totalDue.toFixed(2);
+
+
+    // ===============================
+    // ALSO GENERATE TEXT REPORT
+    // ===============================
+
+    let report = generateReport();
+
+    let content =
+        document.getElementById("billContent");
+
+    if (content) {
+
+        content.innerHTML =
+            "<pre>" + report + "</pre>";
+
+    }
+
+
+    // ===============================
+    // OPEN REPORT MODAL
+    // ===============================
+
+    document.getElementById("reportModal")
+        .style.display = "flex";
 
 };
-
 
 
 
