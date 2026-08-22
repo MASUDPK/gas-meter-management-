@@ -289,75 +289,52 @@ loadFlats();
 
 function renderTable(){
 
+    tableBody.innerHTML = "";
 
-tableBody.innerHTML="";
+    customers.forEach((customer,index)=>{
 
+        tableBody.innerHTML += `
 
+        <tr data-index="${index}">
 
-customers.forEach((customer,index)=>{
+            <td>${customer.flat}</td>
 
+            <td>${customer.meter}</td>
 
-tableBody.innerHTML += `
+            <td>${customer.name || "-"}</td>
 
+            <td>${customer.mobile || "-"}</td>
 
+            <td>${customer.previous}</td>
 
+            <td>${customer.current}</td>
 
-<tr data-index="${index}">
+            <td>${customer.unit}</td>
 
-<td>${customer.flat}</td>
+            <td>${Number(customer.bill || 0).toFixed(2)}</td>
 
-<td>${customer.meter}</td>
+            <td>${Number(customer.paid || 0).toFixed(2)}</td>
 
-<td>${customer.name || "-"}</td>
+            <td>${Number(customer.due || 0).toFixed(2)}</td>
 
-<td>${customer.mobile || "-"}</td>
+            <td>${customer.status}</td>
 
-<td>${customer.previous}</td>
+            <td>
+                <button
+                    class="sendBtn"
+                    onclick="event.stopPropagation(); sendCustomerWhatsApp(${index})">
+                    <i class="fab fa-whatsapp"></i>
+                    Send
+                </button>
+            </td>
 
-<td>${customer.current}</td>
+        </tr>
 
-<td>${customer.unit}</td>
+        `;
 
-<td>${customer.bill.toFixed(2)}</td>
-
-<td>${customer.paid.toFixed(2)}</td>
-
-<td>${customer.due.toFixed(2)}</td>
-
-<td>${customer.status}</td>
-
-<td>
-
-<button
-class="sendBtn"
-onclick="event.stopPropagation(); sendCustomerWhatsApp(${index})">
-
-<i class="fab fa-whatsapp"></i>
-
-Send
-
-</button>
-
-</td>
-
-</tr>
-
-
-
-<!-- ==================================================
-END: WhatsApp Send Button
-================================================== -->
-
-
-
-`;
-
-
-});
-
+    });
 
 }
-
 
 
 
