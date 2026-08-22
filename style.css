@@ -558,37 +558,62 @@ body {
 
 @media (max-width: 600px) {
 
+    /* =========================
+       COMPACT MOBILE HEADER
+       ========================= */
+
     .header {
-        padding: 15px;
+        padding: 8px 10px;
+        min-height: auto;
+        gap: 6px;
+        flex-wrap: nowrap;
     }
 
     .logo {
-        text-align: center;
+        min-width: 0;
+        flex: 1;
+        text-align: left;
     }
 
     .logo h1 {
-        font-size: 24px;
+        font-size: 18px;
+        margin-bottom: 2px;
+        line-height: 1.2;
     }
 
     .logo p {
-        font-size: 15px;
+        font-size: 11px;
+        margin: 0;
     }
 
     .logo span {
-        font-size: 12px;
+        display: none;
     }
 
     .logo i {
-        font-size: 38px;
+        display: none;
     }
 
     .monthBox {
-        width: 100%;
+        min-width: 105px;
+        width: 105px;
+    }
+
+    .monthBox label {
+        font-size: 10px;
+        margin-bottom: 3px;
     }
 
     .monthBox input {
         width: 100%;
+        padding: 6px 7px;
+        font-size: 12px;
+        border-radius: 6px;
     }
+
+    /* =========================
+       DASHBOARD
+       ========================= */
 
     .dashboard {
         grid-template-columns: repeat(2, 1fr);
@@ -597,6 +622,10 @@ body {
     .card h2 {
         font-size: 18px;
     }
+
+    /* =========================
+       SEARCH
+       ========================= */
 
     .searchBox {
         padding: 10px;
@@ -628,7 +657,6 @@ body {
         font-size: 12px;
     }
 }
-
 /* =========================
    VERY SMALL MOBILE
    ========================= */
