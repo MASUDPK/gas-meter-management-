@@ -840,5 +840,59 @@ body {
 
 }
 
+/* =========================
+   MOBILE CUSTOMER SUMMARY
+   ========================= */
+
+@media (max-width: 600px) {
+
+    #customerTable {
+        border-radius: 8px;
+    }
+
+    #customerTable th {
+        font-size: 10px;
+        padding: 7px 3px;
+    }
+
+    #customerTable td {
+        font-size: 11px;
+        padding: 8px 3px;
+        text-align: center;
+    }
+
+    #customerTable tbody tr {
+        cursor: pointer;
+    }
+
+    #customerTable tbody tr:hover {
+        background: #e0f2fe;
+    }
+
+    #customerTable td:first-child {
+        font-weight: bold;
+        color: #0f766e;
+    }
+
+    #customerTable td:nth-child(3) {
+        font-weight: bold;
+    }
+
+    #customerTable td:nth-child(7) {
+        font-weight: bold;
+    }
+
+    #customerTable td:nth-child(10) {
+        font-weight: bold;
+    }
+
+    #customerTable td:nth-child(11) {
+        font-weight: bold;
+    }
+
+}
+
+
+
 
 
