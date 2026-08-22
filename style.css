@@ -891,7 +891,17 @@ body {
     }
 
 }
+/* =========================
+   MOBILE SHOW ONLY 3 ROWS
+   ========================= */
 
+@media (max-width: 600px) {
+
+    #customerTable tbody tr:nth-child(n+4) {
+        display: none;
+    }
+
+}
 
 
 
