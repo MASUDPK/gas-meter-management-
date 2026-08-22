@@ -3166,32 +3166,6 @@ if(updateCustomerBtn){
 }
 
 
-@media (max-width: 600px) {
-
-    .tableSection {
-        height: 280px;
-        overflow-y: auto !important;
-        overflow-x: hidden !important;
-    }
-
-    #customerTable {
-        border-collapse: separate !important;
-        border-spacing: 0;
-    }
-
-    #customerTable thead th {
-        position: sticky !important;
-        top: 0 !important;
-        z-index: 999 !important;
-        background: #0f766e !important;
-        color: white !important;
-    }
-
-}
-
-
-
-
 
 // ==================================================
 // END: WhatsApp Customer Due Message Feature
