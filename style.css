@@ -1,0 +1,381 @@
+/* ===================================
+   Jamila Bhavan
+   Gas Meter Management System
+   style.css (Part-1)
+=================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f5f7fa;
+    color:#333;
+}
+
+/* ===========================
+HEADER
+=========================== */
+
+.header{
+    width:100%;
+    background:#0f766e;
+    color:#fff;
+    padding:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    box-shadow:0 4px 12px rgba(0,0,0,.20);
+}
+
+.logo h1{
+    font-size:32px;
+    margin-bottom:5px;
+}
+
+.logo p{
+    font-size:18px;
+}
+
+.logo span{
+    display:block;
+    margin-top:8px;
+    color:#d1fae5;
+}
+
+.logo i{
+    font-size:45px;
+    margin-bottom:10px;
+}
+
+.monthBox{
+    display:flex;
+    flex-direction:column;
+}
+
+.monthBox label{
+    margin-bottom:8px;
+    font-weight:bold;
+}
+
+.monthBox input{
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+}
+
+/* ===========================
+DASHBOARD
+=========================== */
+.dashboard{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+    gap:10px;
+    padding:10px;
+}
+
+.card{
+    background:#ffffff;
+    border-radius:12px;
+    padding:10px;
+    text-align:center;
+    box-shadow:0 3px 10px rgba(0,0,0,.12);
+}
+
+.card:hover{
+    transform:translateY(-3px);
+}
+
+.card i{
+    font-size:22px;
+    margin-bottom:5px;
+}
+
+.card h3{
+    font-size:12px;
+    margin:5px 0;
+}
+
+.card h2{
+    font-size:20px;
+    margin:5px 0;
+}
+
+
+
+/* ===========================
+QUICK MENU
+=========================== */
+
+.menu{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+    gap:8px;
+    padding:10px;
+}
+
+.menu button{
+    border-radius:8px;
+    padding:8px;
+    font-size:13px;
+}
+
+.menu i{
+    margin-right:5px;
+}
+
+/* ===========================
+SEARCH
+=========================== */
+
+.searchBox{
+    padding:20px;
+}
+
+.searchBox input{
+    width:100%;
+    padding:14px;
+    border:2px solid #0f766e;
+    border-radius:10px;
+    font-size:16px;
+    outline:none;
+}
+
+/* ===========================
+TABLE
+=========================== */
+
+.tableSection{
+    padding:20px;
+    overflow:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:#fff;
+    border-radius:12px;
+    overflow:hidden;
+}
+
+table thead{
+    background:#0f766e;
+    color:#fff;
+}
+
+table th,
+table td{
+    padding:12px;
+    border:1px solid #ddd;
+    text-align:center;
+}
+
+table tbody tr:nth-child(even){
+    background:#f7f7f7;
+}
+
+table tbody tr:hover{
+    background:#e0f2fe;
+}
+
+
+/* ===========================
+ENTRY MODAL
+=========================== */
+
+.modal{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.45);
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+}
+
+.modal-content{
+    width:95%;
+    max-width:650px;
+    background:#ffffff;
+    border-radius:15px;
+    padding:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+    max-height:90vh;
+    overflow-y:auto;
+    animation:popup .30s ease;
+}
+
+@keyframes popup{
+
+from{
+opacity:0;
+transform:scale(.90);
+}
+
+to{
+opacity:1;
+transform:scale(1);
+}
+
+}
+
+.close,
+.paymentClose{
+
+float:right;
+font-size:30px;
+font-weight:bold;
+cursor:pointer;
+color:#777;
+
+}
+
+.close:hover,
+.paymentClose:hover{
+
+color:red;
+
+}
+
+.modal-content h2{
+
+margin-bottom:20px;
+color:#0f766e;
+text-align:center;
+
+}
+
+.modal-content label{
+
+display:block;
+margin-top:12px;
+margin-bottom:5px;
+font-weight:bold;
+
+}
+
+.modal-content input,
+.modal-content select,
+.modal-content textarea{
+
+width:100%;
+padding:12px;
+border:1px solid #cccccc;
+border-radius:8px;
+font-size:15px;
+outline:none;
+
+}
+
+.modal-content input:focus,
+.modal-content select:focus,
+.modal-content textarea:focus{
+
+border:2px solid #0f766e;
+
+}
+
+/* ===========================
+BUTTONS
+=========================== */
+
+.modalButtons{
+
+display:flex;
+gap:10px;
+margin-top:20px;
+
+}
+
+.modalButtons button{
+
+flex:1;
+padding:14px;
+border:none;
+border-radius:10px;
+font-size:16px;
+cursor:pointer;
+transition:.30s;
+
+}
+
+#saveBtn{
+
+background:#0f766e;
+color:white;
+
+}
+
+#saveBtn:hover{
+
+background:#115e59;
+
+}
+
+#cancelBtn{
+
+background:#ef4444;
+color:white;
+
+}
+
+#cancelBtn:hover{
+
+background:#dc2626;
+
+}
+
+#paymentForm button{
+
+width:100%;
+margin-top:20px;
+padding:14px;
+background:#2563eb;
+color:white;
+border:none;
+border-radius:10px;
+font-size:16px;
+cursor:pointer;
+
+}
+
+#paymentForm button:hover{
+
+background:#1d4ed8;
+
+}
+
+/* ===========================
+BILL AREA
+=========================== */
+
+#billArea{
+
+margin:20px;
+background:white;
+border-radius:15px;
+padding:20px;
+box-shadow:0 5px 15px rgba(0,0,0,.12);
+
+}
+
+#billArea h2{
+
+text-align:center;
+color:#0f766e;
+margin-bottom:20px;
+
+}
+
+#billContent{
+
+min-height:250px;
+border:2px dashed #
