@@ -3087,45 +3087,6 @@ document.querySelector("#customerTable tbody")
 
 });
 
-// ===============================
-// MOBILE SHOW ALL CUSTOMERS
-// ===============================
-
-const showAllBtn =
-    document.getElementById("showAllBtn");
-
-if(showAllBtn){
-
-    showAllBtn.onclick = function(){
-
-        const rows =
-            document.querySelectorAll(
-                "#customerTable tbody tr[data-index]"
-            );
-
-        const isHidden =
-            rows.length > 3 &&
-            getComputedStyle(rows[3]).display === "none";
-
-        rows.forEach((row, index) => {
-
-            if(index >= 3){
-
-                row.style.display =
-                    isHidden ? "table-row" : "none";
-
-            }
-
-        });
-
-        showAllBtn.innerText =
-            isHidden
-            ? "▲ Show Less"
-            : "▼ Show All Customers";
-
-    };
-
-}
 
 
 // ===============================
