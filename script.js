@@ -1068,9 +1068,7 @@ function () {
 document.getElementById("updateBtn")
 .onclick = function () {
 
-    openSelectedCustomerForUpdate();
-
-};
+   
 
 
 
