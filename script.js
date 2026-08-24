@@ -110,8 +110,7 @@ const meterInput =
 document.getElementById("meterNo");
 
 
-const searchInput =
-document.getElementById("searchBox");
+
 
 
 
