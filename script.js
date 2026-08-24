@@ -972,18 +972,18 @@ function openSelectedCustomerForUpdate() {
 document.getElementById("updateBtn")
 .onclick=function(){
 
+    openSelectedCustomerForUpdate();
+
+    return;
 
 
-if(selectedIndex === -1){
+    if(selectedIndex === -1){
 
+        alert("Please select customer first");
 
-alert("Please select customer first");
+        return;
 
-
-return;
-
-
-}
+    }
 
 
 
