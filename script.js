@@ -480,8 +480,17 @@ if (searchInput) {
 // SELECT CUSTOMER ROW
 // ===============================
 
+// ===============================
+// SELECT CUSTOMER ROW
+// ===============================
+
 document.querySelector("#customerTable tbody")
 .addEventListener("click", function(e){
+
+    // WhatsApp button হলে row select বন্ধ
+    if(e.target.closest(".sendBtn")){
+        return;
+    }
 
     let row = e.target.closest("tr");
 
@@ -489,15 +498,23 @@ document.querySelector("#customerTable tbody")
         return;
     }
 
-   selectedIndex = Number(row.dataset.index);
+    // আগের selected row সরানো
+    document
+        .querySelectorAll("#customerTable tbody tr")
+        .forEach(function(item){
+            item.classList.remove("selected-row");
+        });
 
-if(window.innerWidth <= 600){
+    // নতুন row select
+    row.classList.add("selected-row");
 
-    return;
+    // Selected customer index
+    selectedIndex = Number(row.dataset.index);
 
-}
-
-let customer = customers[selectedIndex];
+    console.log(
+        "Selected Flat:",
+        customers[selectedIndex].flat
+    );
 
 });
 
