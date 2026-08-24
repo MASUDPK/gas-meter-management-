@@ -428,7 +428,7 @@ totalDue.toFixed(2);
 
 
 // ===============================
-// SEARCH SYSTEM
+// SEARCH SYSTEM - COMPUTER + MOBILE
 // ===============================
 
 const searchBox = document.getElementById("searchBox");
@@ -441,18 +441,39 @@ if (searchBox) {
             .trim()
             .toLowerCase();
 
-        const rows =
-            document.querySelectorAll(
-                "#customerTable tbody tr:not(.mobile-details)"
-            );
+        const rows = document.querySelectorAll(
+            "#customerTable tbody tr"
+        );
 
         rows.forEach(function (row) {
 
-            const text =
-                row.textContent.toLowerCase();
+            // Mobile details row বাদ
+            if (row.classList.contains("mobile-details")) {
+                row.style.display = "none";
+                return;
+            }
 
-            row.style.display =
-                text.includes(value) ? "" : "none";
+            const text = row.textContent.toLowerCase();
+
+            if (text.includes(value)) {
+
+                row.style.display = "table-row";
+
+            } else {
+
+                row.style.display = "none";
+
+            }
+
+            // Search করার সময় আগের expanded details বন্ধ
+            const nextRow = row.nextElementSibling;
+
+            if (
+                nextRow &&
+                nextRow.classList.contains("mobile-details")
+            ) {
+                nextRow.remove();
+            }
 
         });
 
