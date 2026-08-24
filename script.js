@@ -427,60 +427,56 @@ totalDue.toFixed(2);
 
 
 
-// ===============================
-// SEARCH SYSTEM - COMPUTER + MOBILE
-// ===============================
+// ==========================================
+// FINAL SEARCH - COMPUTER + MOBILE
+// ==========================================
 
 const searchBox = document.getElementById("searchBox");
 
 if (searchBox) {
 
-    searchBox.addEventListener("input", function () {
+    searchBox.oninput = function () {
 
-        const value = this.value
-            .trim()
-            .toLowerCase();
+        const searchValue =
+            searchBox.value.trim().toLowerCase();
 
-        const rows = document.querySelectorAll(
-            "#customerTable tbody tr"
-        );
+        const tableRows =
+            document.querySelectorAll(
+                "#customerTable tbody tr"
+            );
 
-        rows.forEach(function (row) {
+        tableRows.forEach(function(row) {
 
-            // Mobile details row বাদ
+            // Mobile detail row
             if (row.classList.contains("mobile-details")) {
-                row.style.display = "none";
+                row.remove();
                 return;
             }
 
-            const text = row.textContent.toLowerCase();
+            const rowText =
+                row.textContent.toLowerCase();
 
-            if (text.includes(value)) {
+            if (searchValue === "") {
 
-                row.style.display = "table-row";
+                row.style.display = "";
 
-            } else {
+            }
+            else if (rowText.includes(searchValue)) {
+
+                row.style.display = "";
+
+            }
+            else {
 
                 row.style.display = "none";
 
-            }
-
-            // Search করার সময় আগের expanded details বন্ধ
-            const nextRow = row.nextElementSibling;
-
-            if (
-                nextRow &&
-                nextRow.classList.contains("mobile-details")
-            ) {
-                nextRow.remove();
             }
 
         });
 
-    });
+    };
 
 }
-
 // ===============================
 // SELECT CUSTOMER ROW
 // ===============================
