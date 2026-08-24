@@ -464,9 +464,6 @@ if (searchInput) {
     );
 
 }
-// ===============================
-// SELECT CUSTOMER ROW
-// ===============================
 
 // ===============================
 // SELECT CUSTOMER ROW
@@ -3287,3 +3284,47 @@ document
         fileInput.click();
 
     };
+
+// ==========================================
+// SIMPLE SEARCH
+// ==========================================
+
+document.addEventListener("input", function (e) {
+
+    if (e.target.id !== "searchBox") {
+        return;
+    }
+
+    const searchValue =
+        e.target.value.toLowerCase().trim();
+
+    const rows =
+        document.querySelectorAll(
+            "#customerTable tbody tr"
+        );
+
+    rows.forEach(function (row) {
+
+        const rowText =
+            row.textContent.toLowerCase();
+
+        if (rowText.includes(searchValue)) {
+
+            row.style.display = "";
+
+        } else {
+
+            row.style.display = "none";
+
+        }
+
+    });
+
+});
+
+
+
+
+
+
+
