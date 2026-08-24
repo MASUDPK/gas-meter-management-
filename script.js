@@ -874,86 +874,139 @@ document.getElementById("entryModal")
 
 
 
+// ======================================
+// SELECT ROW + UPDATE POPUP
+// ======================================
+
+// Selected customer
+let selectedIndex = -1;
+
+
 // ===============================
-// LOAD CUSTOMER DATA FOR EDIT
+// SELECT CUSTOMER ROW
 // ===============================
 
-
-document.querySelector("#customerTable tbody")
-.addEventListener("click",function(e){
-
-
-let row = e.target.closest("tr");
+const customerTableBody =
+    document.querySelector("#customerTable tbody");
 
 
-if(!row){
+customerTableBody.addEventListener("click", function (e) {
 
-return;
+    // WhatsApp button চাপলে row select হবে না
+    if (e.target.closest(".sendBtn")) {
+        return;
+    }
 
-}
+    const row = e.target.closest("tr");
 
+    if (!row) {
+        return;
+    }
 
-selectedIndex = Number(row.dataset.index);
+    // আগের selected row remove
+    document
+        .querySelectorAll("#customerTable tbody tr")
+        .forEach(function (r) {
 
-if(window.innerWidth <= 600){
-    return;
-}
+            r.classList.remove("selected-row");
 
-let customer = customers[selectedIndex];
-
-
-
-document.getElementById("flatNo").value =
-customer.flat;
-
-
-document.getElementById("meterNo").value =
-customer.meter;
+        });
 
 
-document.getElementById("customerName").value =
-customer.name;
+    // নতুন row select
+    row.classList.add("selected-row");
 
 
-document.getElementById("mobileNumber").value =
-customer.mobile;
+    selectedIndex =
+        Number(row.dataset.index);
 
 
-document.getElementById("previousReading").value =
-customer.previous;
-
-
-document.getElementById("currentReading").value =
-customer.current;
-
-
-document.getElementById("gasRate").value =
-GAS_RATE;
-
-
-document.getElementById("serviceCharge").value =
-SERVICE_CHARGE;
-
-
-document.getElementById("totalAmount").value =
-customer.bill;
-
-
-document.getElementById("receivedAmount").value =
-customer.paid;
-
-
-document.getElementById("currentDue").value =
-customer.due;
-
-
-
-document.getElementById("entryModal")
-.style.display="flex";
-
+    console.log(
+        "Selected Flat:",
+        customers[selectedIndex].flat
+    );
 
 });
 
+
+// ===============================
+// UPDATE BUTTON
+// ===============================
+
+document.getElementById("updateBtn").onclick = function () {
+
+    if (selectedIndex === -1) {
+
+        alert("Please select a Flat first.");
+
+        return;
+    }
+
+
+    const customer =
+        customers[selectedIndex];
+
+
+    // ===============================
+    // LOAD OLD DATA
+    // ===============================
+
+    document.getElementById("flatNo").value =
+        customer.flat;
+
+
+    document.getElementById("meterNo").value =
+        customer.meter;
+
+
+    document.getElementById("customerName").value =
+        customer.name || "";
+
+
+    document.getElementById("mobileNumber").value =
+        customer.mobile || "";
+
+
+    document.getElementById("previousReading").value =
+        customer.previous || 0;
+
+
+    document.getElementById("currentReading").value =
+        customer.current || 0;
+
+
+    document.getElementById("gasRate").value =
+        GAS_RATE;
+
+
+    document.getElementById("serviceCharge").value =
+        SERVICE_CHARGE;
+
+
+    document.getElementById("totalAmount").value =
+        customer.bill || 0;
+
+
+    document.getElementById("receivedAmount").value =
+        customer.paid || 0;
+
+
+    document.getElementById("currentDue").value =
+        customer.due || 0;
+
+
+    // ===============================
+    // OPEN UPDATE POPUP
+    // ===============================
+
+    document.getElementById("entryModal")
+        .style.display = "flex";
+
+
+    // Recalculate
+    calculateBill();
+
+};
 
 
 
