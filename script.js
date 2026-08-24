@@ -286,59 +286,70 @@ loadFlats();
 // RENDER CUSTOMER TABLE
 // ===============================
 
+function renderTable() {
 
-tableBody.innerHTML = "";
+    tableBody.innerHTML = "";
 
-customers.forEach((customer, index) => {
+    customers.forEach((customer, index) => {
 
-    const row = document.createElement("tr");
+        const row =
+            document.createElement("tr");
 
-    row.dataset.index = index;
+        row.dataset.index = index;
 
-    row.innerHTML = `
+        row.innerHTML = `
 
-        <td>${customer.flat || "-"}</td>
+            <td>${customer.flat || "-"}</td>
 
-        <td>${customer.meter || "-"}</td>
+            <td>${customer.meter || "-"}</td>
 
-        <td>${customer.name || "-"}</td>
+            <td>${customer.name || "-"}</td>
 
-        <td>${customer.mobile || "-"}</td>
+            <td>${customer.mobile || "-"}</td>
 
-        <td>${customer.previous || 0}</td>
+            <td>${customer.previous || 0}</td>
 
-        <td>${customer.current || 0}</td>
+            <td>${customer.current || 0}</td>
 
-        <td>${customer.unit || 0}</td>
+            <td>${customer.unit || 0}</td>
 
-        <td>${Number(customer.bill || 0).toFixed(2)}</td>
+            <td>
+                ${Number(customer.bill || 0).toFixed(2)}
+            </td>
 
-        <td>${Number(customer.paid || 0).toFixed(2)}</td>
+            <td>
+                ${Number(customer.paid || 0).toFixed(2)}
+            </td>
 
-        <td>${Number(customer.due || 0).toFixed(2)}</td>
+            <td>
+                ${Number(customer.due || 0).toFixed(2)}
+            </td>
 
-        <td>${customer.status || "DUE"}</td>
+            <td>
+                ${customer.status || "Active"}
+            </td>
 
-        <td>
+            <td>
 
-            <button
-                class="sendBtn"
-                onclick="event.stopPropagation(); sendCustomerWhatsApp(${index})">
+                <button
+                    class="sendBtn"
+                    onclick="event.stopPropagation(); sendCustomerWhatsApp(${index})">
 
-                <i class="fab fa-whatsapp"></i>
+                    <i class="fab fa-whatsapp"></i>
 
-                Send
+                    Send
 
-            </button>
+                </button>
 
-        </td>
+            </td>
 
-    `;
+        `;
 
-    tableBody.appendChild(row);
+        tableBody.appendChild(row);
 
-});
+    });
 
+}
 
 // ===============================
 // UPDATE DASHBOARD
