@@ -961,29 +961,97 @@ function openSelectedCustomerForUpdate() {
         .style.display = "flex";
 
 }
-
-
-
 // ===============================
-// UPDATE CUSTOMER
+// OPEN SELECTED ROW IN UPDATE POPUP
 // ===============================
 
+function openSelectedCustomerForUpdate() {
 
-document.getElementById("updateBtn")
-.onclick=function(){
+    if (selectedIndex === -1) {
 
-    openSelectedCustomerForUpdate();
-
-    return;
-
-
-    if(selectedIndex === -1){
-
-        alert("Please select customer first");
+        alert("Please select a Flat from the table first.");
 
         return;
 
     }
+
+    const customer = customers[selectedIndex];
+
+
+    // Flat
+    document.getElementById("flatNo").value =
+        customer.flat;
+
+    // Meter
+    document.getElementById("meterNo").value =
+        customer.meter;
+
+    // Customer Name
+    document.getElementById("customerName").value =
+        customer.name || "";
+
+    // Mobile
+    document.getElementById("mobileNumber").value =
+        customer.mobile || "";
+
+    // Previous Reading
+    document.getElementById("previousReading").value =
+        customer.previous || 0;
+
+    // Current Reading
+    document.getElementById("currentReading").value =
+        customer.current || 0;
+
+    // Gas Rate
+    document.getElementById("gasRate").value =
+        GAS_RATE;
+
+    // Service Charge
+    document.getElementById("serviceCharge").value =
+        SERVICE_CHARGE;
+
+    // Previous Due
+    document.getElementById("previousDue").value =
+        customer.previousDue || 0;
+
+    // Discount
+    document.getElementById("discount").value =
+        customer.discount || 0;
+
+    // Late Fee
+    document.getElementById("lateFee").value =
+        customer.lateFee || 0;
+
+    // Total Bill
+    document.getElementById("totalAmount").value =
+        Number(customer.bill || 0).toFixed(2);
+
+    // Received
+    document.getElementById("receivedAmount").value =
+        Number(customer.paid || 0).toFixed(2);
+
+    // Current Due
+    document.getElementById("currentDue").value =
+        Number(customer.due || 0).toFixed(2);
+
+
+    // Open Popup
+    document.getElementById("entryModal")
+        .style.display = "flex";
+
+}
+
+
+// ===============================
+// UPDATE BUTTON
+// ===============================
+
+document.getElementById("updateBtn")
+.onclick = function () {
+
+    openSelectedCustomerForUpdate();
+
+};
 
 
 
