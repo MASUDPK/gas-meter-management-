@@ -896,7 +896,71 @@ document.getElementById("entryModal")
 // ======================================
 
 
+// ===============================
+// OPEN SELECTED CUSTOMER FOR UPDATE
+// ===============================
 
+function openSelectedCustomerForUpdate() {
+
+    if (selectedIndex === -1) {
+
+        alert("Please select a Flat first.");
+
+        return;
+
+    }
+
+    const customer = customers[selectedIndex];
+
+
+    document.getElementById("flatNo").value =
+        customer.flat;
+
+    document.getElementById("meterNo").value =
+        customer.meter;
+
+    document.getElementById("customerName").value =
+        customer.name || "";
+
+    document.getElementById("mobileNumber").value =
+        customer.mobile || "";
+
+    document.getElementById("previousReading").value =
+        customer.previous || 0;
+
+    document.getElementById("currentReading").value =
+        customer.current || 0;
+
+    document.getElementById("gasRate").value =
+        GAS_RATE;
+
+    document.getElementById("serviceCharge").value =
+        SERVICE_CHARGE;
+
+    document.getElementById("previousDue").value =
+        0;
+
+    document.getElementById("discount").value =
+        0;
+
+    document.getElementById("lateFee").value =
+        0;
+
+    document.getElementById("totalAmount").value =
+        Number(customer.bill || 0).toFixed(2);
+
+    document.getElementById("receivedAmount").value =
+        Number(customer.paid || 0).toFixed(2);
+
+    document.getElementById("currentDue").value =
+        Number(customer.due || 0).toFixed(2);
+
+
+    // Open Popup
+    document.getElementById("entryModal")
+        .style.display = "flex";
+
+}
 
 
 
