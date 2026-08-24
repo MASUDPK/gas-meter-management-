@@ -287,56 +287,57 @@ loadFlats();
 // ===============================
 
 
-function renderTable(){
+tableBody.innerHTML = "";
 
-    tableBody.innerHTML = "";
+customers.forEach((customer, index) => {
 
-    customers.forEach((customer,index)=>{
+    const row = document.createElement("tr");
 
-        tableBody.innerHTML += `
+    row.dataset.index = index;
 
-        <tr data-index="${index}">
+    row.innerHTML = `
 
-            <td>${customer.flat}</td>
+        <td>${customer.flat || "-"}</td>
 
-            <td>${customer.meter}</td>
+        <td>${customer.meter || "-"}</td>
 
-            <td>${customer.name || "-"}</td>
+        <td>${customer.name || "-"}</td>
 
-            <td>${customer.mobile || "-"}</td>
+        <td>${customer.mobile || "-"}</td>
 
-            <td>${customer.previous}</td>
+        <td>${customer.previous || 0}</td>
 
-            <td>${customer.current}</td>
+        <td>${customer.current || 0}</td>
 
-            <td>${customer.unit}</td>
+        <td>${customer.unit || 0}</td>
 
-            <td>${Number(customer.bill || 0).toFixed(2)}</td>
+        <td>${Number(customer.bill || 0).toFixed(2)}</td>
 
-            <td>${Number(customer.paid || 0).toFixed(2)}</td>
+        <td>${Number(customer.paid || 0).toFixed(2)}</td>
 
-            <td>${Number(customer.due || 0).toFixed(2)}</td>
+        <td>${Number(customer.due || 0).toFixed(2)}</td>
 
-            <td>${customer.status}</td>
+        <td>${customer.status || "DUE"}</td>
 
-            <td>
-                <button
-                    class="sendBtn"
-                    onclick="event.stopPropagation(); sendCustomerWhatsApp(${index})">
-                    <i class="fab fa-whatsapp"></i>
-                    Send
-                </button>
-            </td>
+        <td>
 
-        </tr>
+            <button
+                class="sendBtn"
+                onclick="event.stopPropagation(); sendCustomerWhatsApp(${index})">
 
-        `;
+                <i class="fab fa-whatsapp"></i>
 
-    });
+                Send
 
-}
+            </button>
 
+        </td>
 
+    `;
+
+    tableBody.appendChild(row);
+
+});
 
 
 // ===============================
