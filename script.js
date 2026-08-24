@@ -416,68 +416,54 @@ totalDue.toFixed(2);
 
 
 
+// ==========================================
+// SEARCH SYSTEM
+// ==========================================
 
-// ===============================
-// SEARCH CUSTOMER
-// ===============================
-
-
-searchInput.addEventListener(
-
-"keyup",
-
-function(){
+const searchInput =
+    document.getElementById("searchBox");
 
 
-let value =
+if (searchInput) {
 
-this.value.toLowerCase();
+    searchInput.addEventListener(
+        "input",
+        function () {
 
-
-
-let rows =
-
-document.querySelectorAll(
-
-"#customerTable tbody tr"
-
-);
+            const value =
+                this.value.toLowerCase().trim();
 
 
-
-rows.forEach(row=>{
-
-
-let text =
-
-row.innerText.toLowerCase();
+            const rows =
+                document.querySelectorAll(
+                    "#customerTable tbody tr"
+                );
 
 
+            rows.forEach(function (row) {
 
-if(text.includes(value)){
-
-
-row.style.display="";
-
-
-}
-
-else{
+                const text =
+                    row.innerText.toLowerCase();
 
 
-row.style.display="none";
+                if (text.includes(value)) {
 
+                    row.style.display = "";
+
+                }
+
+                else {
+
+                    row.style.display = "none";
+
+                }
+
+            });
+
+        }
+    );
 
 }
-
-
-});
-
-
-}
-
-);
-
 // ===============================
 // SELECT CUSTOMER ROW
 // ===============================
