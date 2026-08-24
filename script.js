@@ -3203,3 +3203,101 @@ document
         importBackup();
 
     });
+// ==========================================
+// RESTORE BUTTON FIX
+// ==========================================
+
+document
+    .getElementById("restoreBtn")
+    .onclick = function () {
+
+        const fileInput =
+            document.createElement("input");
+
+        fileInput.type = "file";
+
+        fileInput.accept =
+            ".json,application/json";
+
+        fileInput.onchange = function (event) {
+
+            const file =
+                event.target.files[0];
+
+            if (!file) {
+                return;
+            }
+
+            const reader =
+                new FileReader();
+
+            reader.onload = function () {
+
+                try {
+
+                    const backupData =
+                        JSON.parse(
+                            reader.result
+                        );
+
+                    if (
+                        !backupData.customers ||
+                        !backupData.paymentHistory
+                    ) {
+
+                        alert(
+                            "❌ Invalid GMS backup file."
+                        );
+
+                        return;
+                    }
+
+
+                    customers =
+                        backupData.customers;
+
+                    paymentHistory =
+                        backupData.paymentHistory;
+
+
+                    localStorage.setItem(
+                        "customers",
+                        JSON.stringify(customers)
+                    );
+
+                    localStorage.setItem(
+                        "paymentHistory",
+                        JSON.stringify(paymentHistory)
+                    );
+
+
+                    renderTable();
+
+                    updateDashboard();
+
+
+                    alert(
+                        "✅ GMS data restored successfully."
+                    );
+
+                }
+
+                catch (error) {
+
+                    alert(
+                        "❌ Backup file could not be restored."
+                    );
+
+                    console.error(error);
+
+                }
+
+            };
+
+            reader.readAsText(file);
+
+        };
+
+        fileInput.click();
+
+    };
