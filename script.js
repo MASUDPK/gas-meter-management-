@@ -896,28 +896,70 @@ document.getElementById("entryModal")
 // ======================================
 
 
+// ======================================
+// UPDATE SYSTEM
+// Select Flat → Load Data → Popup
+// ======================================
+
 // ===============================
-// OPEN SELECTED CUSTOMER FOR UPDATE
+// UPDATE BUTTON
 // ===============================
 
-function openSelectedCustomerForUpdate() {
+document.getElementById("updateCustomerBtn").onclick = function () {
 
-    if (selectedIndex === -1) {
+    // Open Update Popup
+    document.getElementById("entryModal").style.display = "flex";
 
-        alert("Please select a Flat first.");
+    // Update mode
+    selectedIndex = -1;
+
+    // Flat list already loaded in flatNo
+    // Select first Flat
+    document.getElementById("flatNo").value = FLATS[0];
+
+    // Load selected Flat data
+    loadUpdateCustomer();
+
+};
+
+
+// ===============================
+// LOAD SELECTED FLAT DATA
+// ===============================
+
+function loadUpdateCustomer() {
+
+    const flat =
+        document.getElementById("flatNo").value;
+
+    const index =
+        customers.findIndex(
+            customer => customer.flat === flat
+        );
+
+    if (index === -1) {
+
+        alert("Flat data not found");
 
         return;
-
     }
 
-    const customer = customers[selectedIndex];
+    // Remember selected customer
+    selectedIndex = index;
 
+    const customer =
+        customers[index];
+
+
+    // ===============================
+    // LOAD DATA INTO POPUP
+    // ===============================
 
     document.getElementById("flatNo").value =
         customer.flat;
 
     document.getElementById("meterNo").value =
-        customer.meter;
+        customer.meter || "";
 
     document.getElementById("customerName").value =
         customer.name || "";
@@ -937,111 +979,39 @@ function openSelectedCustomerForUpdate() {
     document.getElementById("serviceCharge").value =
         SERVICE_CHARGE;
 
-    document.getElementById("previousDue").value =
-        0;
-
-    document.getElementById("discount").value =
-        0;
-
-    document.getElementById("lateFee").value =
-        0;
-
-    document.getElementById("totalAmount").value =
-        Number(customer.bill || 0).toFixed(2);
-
-    document.getElementById("receivedAmount").value =
-        Number(customer.paid || 0).toFixed(2);
-
-    document.getElementById("currentDue").value =
-        Number(customer.due || 0).toFixed(2);
-
-
-    // Open Popup
-    document.getElementById("entryModal")
-        .style.display = "flex";
-
-}
-// ===============================
-// OPEN SELECTED ROW IN UPDATE POPUP
-// ===============================
-
-function openSelectedCustomerForUpdate() {
-
-    if (selectedIndex === -1) {
-
-        alert("Please select a Flat from the table first.");
-
-        return;
-
-    }
-
-    const customer = customers[selectedIndex];
-
-
-    // Flat
-    document.getElementById("flatNo").value =
-        customer.flat;
-
-    // Meter
-    document.getElementById("meterNo").value =
-        customer.meter;
-
-    // Customer Name
-    document.getElementById("customerName").value =
-        customer.name || "";
-
-    // Mobile
-    document.getElementById("mobileNumber").value =
-        customer.mobile || "";
-
-    // Previous Reading
-    document.getElementById("previousReading").value =
-        customer.previous || 0;
-
-    // Current Reading
-    document.getElementById("currentReading").value =
-        customer.current || 0;
-
-    // Gas Rate
-    document.getElementById("gasRate").value =
-        GAS_RATE;
-
-    // Service Charge
-    document.getElementById("serviceCharge").value =
-        SERVICE_CHARGE;
-
-    // Previous Due
     document.getElementById("previousDue").value =
         customer.previousDue || 0;
 
-    // Discount
     document.getElementById("discount").value =
         customer.discount || 0;
 
-    // Late Fee
     document.getElementById("lateFee").value =
         customer.lateFee || 0;
 
-    // Total Bill
     document.getElementById("totalAmount").value =
         Number(customer.bill || 0).toFixed(2);
 
-    // Received
     document.getElementById("receivedAmount").value =
         Number(customer.paid || 0).toFixed(2);
 
-    // Current Due
     document.getElementById("currentDue").value =
         Number(customer.due || 0).toFixed(2);
-
-
-    // Open Popup
-    document.getElementById("entryModal")
-        .style.display = "flex";
 
 }
 
 
+// ===============================
+// FLAT CHANGE
+// A-2 → A-2 DATA
+// A-3 → A-3 DATA
+// ===============================
+
+document.getElementById("flatNo").onchange =
+function () {
+
+    loadUpdateCustomer();
+
+};
 // ===============================
 // UPDATE BUTTON
 // ===============================
