@@ -3171,3 +3171,73 @@ if(updateCustomerBtn){
 // END: WhatsApp Customer Due Message Feature
 // এই অংশের নিচে আর কিছু যোগ করার দরকার নেই
 // ==================================================
+
+
+
+// ==========================================
+// BACKUP DATA
+// ==========================================
+
+document
+    .getElementById("backupBtn")
+    .addEventListener("click", function () {
+
+        const backupData = {
+
+            backupDate:
+                new Date().toISOString(),
+
+            gasMeterData:
+                customers
+
+        };
+
+
+        const jsonData =
+            JSON.stringify(
+                backupData,
+                null,
+                2
+            );
+
+
+        const blob =
+            new Blob(
+                [jsonData],
+                {
+                    type: "application/json"
+                }
+            );
+
+
+        const url =
+            URL.createObjectURL(blob);
+
+
+        const a =
+            document.createElement("a");
+
+        a.href = url;
+
+        a.download =
+            "GMS_Backup_" +
+            new Date()
+                .toISOString()
+                .slice(0, 10) +
+            ".json";
+
+
+        document.body.appendChild(a);
+
+        a.click();
+
+        document.body.removeChild(a);
+
+        URL.revokeObjectURL(url);
+
+
+        alert(
+            "✅ GMS Backup successfully downloaded."
+        );
+
+    });
