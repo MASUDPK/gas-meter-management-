@@ -905,24 +905,73 @@ document.getElementById("entryModal")
 // UPDATE BUTTON
 // ===============================
 
-document.getElementById("updateCustomerBtn").onclick = function () {
+document.getElementById("updateBtn")
+.onclick = function () {
 
-    // Open Update Popup
-    document.getElementById("entryModal").style.display = "flex";
+    if (selectedIndex === -1) {
 
-    // Update mode
-    selectedIndex = -1;
+        alert("Please select customer first");
 
-    // Flat list already loaded in flatNo
-    // Select first Flat
-    document.getElementById("flatNo").value = FLATS[0];
+        return;
 
-    // Load selected Flat data
-    loadUpdateCustomer();
+    }
+
+
+    let result = calculateBill();
+
+
+    customers[selectedIndex].name =
+        document.getElementById("customerName").value;
+
+
+    customers[selectedIndex].mobile =
+        document.getElementById("mobileNumber").value;
+
+
+    customers[selectedIndex].previous =
+        Number(
+            document.getElementById("previousReading").value
+        );
+
+
+    customers[selectedIndex].current =
+        Number(
+            document.getElementById("currentReading").value
+        );
+
+
+    customers[selectedIndex].unit =
+        result.unit;
+
+
+    customers[selectedIndex].bill =
+        result.total;
+
+
+    customers[selectedIndex].paid =
+        Number(
+            document.getElementById("receivedAmount").value || 0
+        );
+
+
+    customers[selectedIndex].due =
+        result.due;
+
+
+    customers[selectedIndex].status =
+        result.due <= 0 ? "Paid" : "Due";
+
+
+    saveData();
+
+    renderTable();
+
+    updateDashboard();
+
+
+    alert("Customer Updated Successfully");
 
 };
-
-
 // ===============================
 // LOAD SELECTED FLAT DATA
 // ===============================
