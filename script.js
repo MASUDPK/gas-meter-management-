@@ -427,52 +427,36 @@ totalDue.toFixed(2);
 
 
 
-// ==========================================
+// ===============================
 // SEARCH SYSTEM
-// ==========================================
+// ===============================
 
-const searchInput =
-    document.getElementById("searchBox");
+const searchBox = document.getElementById("searchBox");
 
+if (searchBox) {
 
-if (searchInput) {
+    searchBox.addEventListener("input", function () {
 
-    searchInput.addEventListener(
-        "input",
-        function () {
+        const value = this.value
+            .trim()
+            .toLowerCase();
 
-            const value =
-                this.value.toLowerCase().trim();
+        const rows =
+            document.querySelectorAll(
+                "#customerTable tbody tr:not(.mobile-details)"
+            );
 
+        rows.forEach(function (row) {
 
-            const rows =
-                document.querySelectorAll(
-                    "#customerTable tbody tr"
-                );
+            const text =
+                row.textContent.toLowerCase();
 
+            row.style.display =
+                text.includes(value) ? "" : "none";
 
-            rows.forEach(function (row) {
+        });
 
-                const text =
-                    row.innerText.toLowerCase();
-
-
-                if (text.includes(value)) {
-
-                    row.style.display = "";
-
-                }
-
-                else {
-
-                    row.style.display = "none";
-
-                }
-
-            });
-
-        }
-    );
+    });
 
 }
 
