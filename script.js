@@ -3190,3 +3190,16 @@ document
         );
 
     });
+
+
+// ==========================================
+// RESTORE BUTTON
+// ==========================================
+
+document
+    .getElementById("restoreBtn")
+    .addEventListener("click", function () {
+
+        importBackup();
+
+    });
