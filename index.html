@@ -694,7 +694,63 @@ Developed by Rezaul Haque
 
 
 </footer>
+<!-- =========================================
+     FIREBASE START
+     ========================================= -->
+
+<script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore-compat.js"></script>
+
+<script>
+
+const firebaseConfig = {
+
+    apiKey: "AIzaSyAaKfaS-qdX0pC9LvRlXAWnKTc3oG5GKkI",
+
+    authDomain:
+    "jamila-bhavan-gas-management.firebaseapp.com",
+
+    projectId:
+    "jamila-bhavan-gas-management",
+
+    storageBucket:
+    "jamila-bhavan-gas-management.firebasestorage.app",
+
+    messagingSenderId:
+    "680395645091",
+
+    appId:
+    "1:680395645091:web:d5169cc037d1dbcc819f16",
+
+    measurementId:
+    "G-ZNQ1YTSJ93"
+
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+
+const db = firebase.firestore();
+
+window.firebaseAuth = auth;
+
+window.firebaseDB = db;
+
+console.log("Firebase connected successfully");
+
+</script>
+
+<!-- =========================================
+     FIREBASE END
+     ========================================= -->
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 <script src="script.js"></script>
 
 
