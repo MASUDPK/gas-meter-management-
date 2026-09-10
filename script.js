@@ -191,6 +191,10 @@ function saveData() {
 
 let cloudLoadDone = false;
 
+// ======================================
+// STEP 3 — SAFE LOCAL → CLOUD MIGRATION
+// ======================================
+
 async function loadDataFromCloud() {
 
     if (!window.firebaseAuth || !window.firebaseDB) {
@@ -207,7 +211,7 @@ async function loadDataFromCloud() {
 
     try {
 
-        console.log("☁️ Loading data from Cloud...");
+        console.log("☁️ Checking Cloud data...");
 
         const docRef = window.firebaseDB
             .collection("jamilaBhavan")
@@ -215,21 +219,31 @@ async function loadDataFromCloud() {
 
         const docSnap = await docRef.get();
 
+
+        // ======================================
+        // CASE 1 — CLOUD DATA EXISTS
+        // ======================================
+
         if (docSnap.exists) {
 
             const cloudData = docSnap.data();
 
-            // Load Customers
+            console.log("☁️ Cloud data found.");
+
             if (Array.isArray(cloudData.customers)) {
+
                 customers = cloudData.customers;
+
             }
 
-            // Load Payment History
             if (Array.isArray(cloudData.paymentHistory)) {
+
                 paymentHistory = cloudData.paymentHistory;
+
             }
 
-            // Save Cloud data to LocalStorage
+
+            // Save Cloud copy to LocalStorage
             localStorage.setItem(
                 "customers",
                 JSON.stringify(customers)
@@ -240,38 +254,94 @@ async function loadDataFromCloud() {
                 JSON.stringify(paymentHistory)
             );
 
-            // Refresh screen
+
+            // Refresh application
             renderTable();
             updateDashboard();
 
+
             console.log("☁️ Cloud Load Successful!");
 
-        } else {
+        }
 
-            console.log("☁️ No Cloud data found yet.");
+
+        // ======================================
+        // CASE 2 — CLOUD DATA DOES NOT EXIST
+        // ======================================
+
+        else {
+
+            console.log("☁️ No Cloud data found.");
+
+            const localCustomers =
+                JSON.parse(
+                    localStorage.getItem("customers")
+                ) || [];
+
+            const localPayments =
+                JSON.parse(
+                    localStorage.getItem("paymentHistory")
+                ) || [];
+
+
+            // ======================================
+            // LOCAL DATA EXISTS
+            // ======================================
+
+            if (
+                localCustomers.length > 0 ||
+                localPayments.length > 0
+            ) {
+
+                console.log(
+                    "📦 Existing Local data found."
+                );
+
+                // Keep existing LocalStorage data
+                customers = localCustomers;
+                paymentHistory = localPayments;
+
+
+                // Upload existing local data
+                await saveCloudData();
+
+
+                console.log(
+                    "☁️ Existing Local data migrated to Cloud!"
+                );
+
+            }
+
+
+            // ======================================
+            // NO LOCAL DATA
+            // ======================================
+
+            else {
+
+                console.log(
+                    "ℹ️ No existing Local data to migrate."
+                );
+
+            }
 
         }
 
     } catch (error) {
 
-        console.error("☁️ Cloud Load Error:", error);
+        console.error(
+            "☁️ Cloud Migration Error:",
+            error
+        );
 
     }
+
 }
 
 
-// Load Cloud data after Admin Login
-window.firebaseAuth.onAuthStateChanged(async function(user) {
-
-    if (user && !cloudLoadDone) {
-
-        cloudLoadDone = true;
-
-        await loadDataFromCloud();
-
-    }
-
-});
+// ======================================
+// STEP 3 — SAFE LOCAL → CLOUD MIGRATION END
+// ======================================
 
 // ======================================
 // STEP 1 — CLOUD LOAD END
