@@ -877,7 +877,10 @@ const loginMessage =
 document.getElementById("loginMessage");
 
 
-// Login button
+// ===============================
+// ADMIN LOGIN
+// ===============================
+
 loginBtn.addEventListener("click", async function () {
 
     const email =
@@ -912,17 +915,17 @@ loginBtn.addEventListener("click", async function () {
         loginMessage.textContent =
         "Login successful.";
 
+    }
 
-} catch (error) {
-    console.error("LOGIN ERROR:", error);
+    catch (error) {
 
-    loginMessage.textContent =
+        console.error(
+            "LOGIN ERROR:",
+            error
+        );
+
+        loginMessage.textContent =
         "Login failed: " + error.code;
-
-    loginBtn.disabled = false;
-    loginBtn.innerHTML =
-        '<i class="fas fa-right-to-bracket"></i> Login';
-}
 
         loginBtn.disabled = false;
 
@@ -934,7 +937,10 @@ loginBtn.addEventListener("click", async function () {
 });
 
 
-// Check login status
+// ===============================
+// CHECK LOGIN STATUS
+// ===============================
+
 auth.onAuthStateChanged(function (user) {
 
     if (user) {
@@ -952,8 +958,9 @@ auth.onAuthStateChanged(function (user) {
             "loginScreen"
         ).style.display = "none";
 
+    }
 
-    } else {
+    else {
 
         console.log(
             "No admin logged in"
@@ -976,7 +983,6 @@ auth.onAuthStateChanged(function (user) {
 <!-- =========================================
      ADMIN AUTHENTICATION END
      ========================================= -->
-
 <!-- =========================================
      FIRESTORE TEST BUTTON START
      ========================================= -->
