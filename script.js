@@ -109,37 +109,82 @@ document.getElementById("flatNo");
 const meterInput =
 document.getElementById("meterNo");
 
+// ======================================
+// STEP 2 — CLOUD SAVE START
+// ======================================
+
+async function saveCloudData() {
+
+    // Firebase available কিনা check
+    if (!window.firebaseAuth || !window.firebaseDB) {
+        console.log("Firebase is not available.");
+        return;
+    }
+
+    // Admin login করা আছে কিনা check
+    const user = window.firebaseAuth.currentUser;
+
+    if (!user) {
+        console.log("Cloud Save skipped: Admin not logged in.");
+        return;
+    }
+
+    try {
+
+        await window.firebaseDB
+            .collection("jamilaBhavan")
+            .doc("systemData")
+            .set({
+
+                customers: customers,
+
+                paymentHistory: paymentHistory,
+
+                updatedAt:
+                    firebase.firestore.FieldValue.serverTimestamp(),
+
+                updatedBy: user.email
+
+            });
+
+        console.log("☁️ Cloud Save Successful!");
+
+    } catch (error) {
+
+        console.error("☁️ Cloud Save Error:", error);
+
+    }
+}
 
 
+function saveData() {
+
+    // ===============================
+    // LOCAL SAVE
+    // ===============================
+
+    localStorage.setItem(
+        "customers",
+        JSON.stringify(customers)
+    );
+
+    localStorage.setItem(
+        "paymentHistory",
+        JSON.stringify(paymentHistory)
+    );
 
 
+    // ===============================
+    // CLOUD SAVE
+    // ===============================
 
-// ===============================
-// SAVE DATABASE
-// ===============================
-
-
-function saveData(){
-
-localStorage.setItem(
-
-"customers",
-
-JSON.stringify(customers)
-
-);
-
-
-localStorage.setItem(
-
-"paymentHistory",
-
-JSON.stringify(paymentHistory)
-
-);
+    saveCloudData();
 
 }
 
+// ======================================
+// STEP 2 — CLOUD SAVE END
+// ======================================
 // ======================================
 // STEP 1 — CLOUD LOAD START
 // ======================================
