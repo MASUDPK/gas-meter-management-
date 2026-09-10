@@ -140,7 +140,97 @@ JSON.stringify(paymentHistory)
 
 }
 
+// ======================================
+// STEP 1 — CLOUD LOAD START
+// ======================================
 
+let cloudLoadDone = false;
+
+async function loadDataFromCloud() {
+
+    if (!window.firebaseAuth || !window.firebaseDB) {
+        console.log("Firebase is not available.");
+        return;
+    }
+
+    const user = window.firebaseAuth.currentUser;
+
+    if (!user) {
+        console.log("No logged-in admin.");
+        return;
+    }
+
+    try {
+
+        console.log("☁️ Loading data from Cloud...");
+
+        const docRef = window.firebaseDB
+            .collection("jamilaBhavan")
+            .doc("systemData");
+
+        const docSnap = await docRef.get();
+
+        if (docSnap.exists) {
+
+            const cloudData = docSnap.data();
+
+            // Load Customers
+            if (Array.isArray(cloudData.customers)) {
+                customers = cloudData.customers;
+            }
+
+            // Load Payment History
+            if (Array.isArray(cloudData.paymentHistory)) {
+                paymentHistory = cloudData.paymentHistory;
+            }
+
+            // Save Cloud data to LocalStorage
+            localStorage.setItem(
+                "customers",
+                JSON.stringify(customers)
+            );
+
+            localStorage.setItem(
+                "paymentHistory",
+                JSON.stringify(paymentHistory)
+            );
+
+            // Refresh screen
+            renderTable();
+            updateDashboard();
+
+            console.log("☁️ Cloud Load Successful!");
+
+        } else {
+
+            console.log("☁️ No Cloud data found yet.");
+
+        }
+
+    } catch (error) {
+
+        console.error("☁️ Cloud Load Error:", error);
+
+    }
+}
+
+
+// Load Cloud data after Admin Login
+window.firebaseAuth.onAuthStateChanged(async function(user) {
+
+    if (user && !cloudLoadDone) {
+
+        cloudLoadDone = true;
+
+        await loadDataFromCloud();
+
+    }
+
+});
+
+// ======================================
+// STEP 1 — CLOUD LOAD END
+// ======================================
 
 // ===============================
 // LOAD FLAT LIST
