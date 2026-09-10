@@ -342,7 +342,25 @@ async function loadDataFromCloud() {
 // ======================================
 // STEP 3 — SAFE LOCAL → CLOUD MIGRATION END
 // ======================================
+// ======================================
+// STEP 3 — CLOUD LOAD AFTER LOGIN
+// ======================================
 
+window.firebaseAuth.onAuthStateChanged(async function(user) {
+
+    if (user && !cloudLoadDone) {
+
+        cloudLoadDone = true;
+
+        await loadDataFromCloud();
+
+    }
+
+});
+
+// ======================================
+// STEP 3 — CLOUD LOAD AFTER LOGIN END
+// ======================================
 // ======================================
 // STEP 1 — CLOUD LOAD END
 // ======================================
