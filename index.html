@@ -740,6 +740,7 @@ Developed by Rezaul Haque
 
 
 </footer>
+
 <!-- =========================================
      FIREBASE START
      ========================================= -->
@@ -776,87 +777,35 @@ const firebaseConfig = {
 
 };
 
+
 firebase.initializeApp(firebaseConfig);
 
-const auth = firebase.auth();
 
-const db = firebase.firestore();
-
-window.firebaseAuth = auth;
-
-window.firebaseDB = db;
-
-console.log("Firebase connected successfully");
-<!-- =========================================
-     FIRESTORE TEST START
-     ========================================= -->
-
-<script>
-
-async function testFirestore() {
-
-    const user = auth.currentUser;
-
-    if (!user) {
-        console.log("Firestore test stopped: Admin is not logged in.");
-        return;
-    }
-
-    try {
-
-        // Save test data
-        await db.collection("jamilaBhavan")
-            .doc("systemTest")
-            .set({
-
-                message: "Firebase Firestore is working",
-                user: user.email,
-                testTime: new Date().toISOString()
-
-            });
-
-        console.log("Firestore SAVE successful");
+const auth =
+firebase.auth();
 
 
-        // Read test data
-        const testDoc =
-            await db.collection("jamilaBhavan")
-            .doc("systemTest")
-            .get();
+const db =
+firebase.firestore();
 
 
-        if (testDoc.exists) {
+window.firebaseAuth =
+auth;
 
-            console.log(
-                "Firestore READ successful:",
-                testDoc.data()
-            );
 
-        } else {
+window.firebaseDB =
+db;
 
-            console.log(
-                "Firestore document not found"
-            );
 
-        }
-
-    } catch (error) {
-
-        console.error(
-            "Firestore TEST ERROR:",
-            error
-        );
-
-    }
-
-}
+console.log(
+    "Firebase connected successfully"
+);
 
 </script>
 
 <!-- =========================================
-     FIRESTORE TEST END
+     FIREBASE END
      ========================================= -->
-
 
 <!-- =========================================
      ADMIN AUTHENTICATION START
