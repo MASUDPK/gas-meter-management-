@@ -3611,7 +3611,35 @@ document
     };
 
 
+// ======================================
+// ADMIN LOGOUT START
+// ======================================
 
+const logoutBtn = document.getElementById("logoutBtn");
+
+if (logoutBtn) {
+
+    logoutBtn.addEventListener("click", async function () {
+
+        try {
+
+            await window.firebaseAuth.signOut();
+
+            console.log("Admin logged out successfully.");
+
+        } catch (error) {
+
+            console.error("Logout Error:", error);
+
+        }
+
+    });
+
+}
+
+// ======================================
+// ADMIN LOGOUT END
+// ======================================
 
 
 
