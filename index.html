@@ -790,6 +790,124 @@ console.log("Firebase connected successfully");
 
 </script>
 
+
+<!-- =========================================
+     ADMIN AUTHENTICATION START
+     ========================================= -->
+
+<script>
+
+const loginBtn =
+document.getElementById("loginBtn");
+
+const loginEmail =
+document.getElementById("loginEmail");
+
+const loginPassword =
+document.getElementById("loginPassword");
+
+const loginMessage =
+document.getElementById("loginMessage");
+
+
+// Login button
+loginBtn.addEventListener("click", async function () {
+
+    const email =
+    loginEmail.value.trim();
+
+    const password =
+    loginPassword.value;
+
+
+    if (!email || !password) {
+
+        loginMessage.textContent =
+        "Please enter email and password.";
+
+        return;
+    }
+
+
+    loginBtn.disabled = true;
+
+    loginBtn.innerHTML =
+    '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+
+
+    try {
+
+        await auth.signInWithEmailAndPassword(
+            email,
+            password
+        );
+
+        loginMessage.textContent =
+        "Login successful.";
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        loginMessage.textContent =
+        "Login failed. Please check your email and password.";
+
+        loginBtn.disabled = false;
+
+        loginBtn.innerHTML =
+        '<i class="fas fa-right-to-bracket"></i> Login';
+
+    }
+
+});
+
+
+// Check login status
+auth.onAuthStateChanged(function (user) {
+
+    if (user) {
+
+        console.log(
+            "Admin logged in:",
+            user.email
+        );
+
+        document.body.classList.remove(
+            "auth-locked"
+        );
+
+        document.getElementById(
+            "loginScreen"
+        ).style.display = "none";
+
+
+    } else {
+
+        console.log(
+            "No admin logged in"
+        );
+
+        document.body.classList.add(
+            "auth-locked"
+        );
+
+        document.getElementById(
+            "loginScreen"
+        ).style.display = "flex";
+
+    }
+
+});
+
+</script>
+
+<!-- =========================================
+     ADMIN AUTHENTICATION END
+     ========================================= -->
+
+
+     
 <!-- =========================================
      FIREBASE END
      ========================================= -->
