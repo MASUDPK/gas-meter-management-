@@ -1278,5 +1278,28 @@ body.auth-locked > *:not(#loginScreen) {
 /* =========================================
    ADMIN LOGIN END
    ========================================= */
+/* ===============================
+   ADMIN LOGOUT BUTTON
+   =============================== */
 
+.adminLogoutBar {
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px 15px;
+}
+
+#logoutBtn {
+    background: #dc2626;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#logoutBtn:hover {
+    background: #b91c1c;
+}
 
