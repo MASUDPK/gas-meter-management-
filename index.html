@@ -820,6 +820,41 @@ loginBtn.addEventListener("click", async function () {
 
 </script>
 
+<script>
+
+// ======================================
+// ADMIN AUTH STATE START
+// ======================================
+
+auth.onAuthStateChanged(function (user) {
+
+    if (user) {
+
+        console.log("Admin logged in:", user.email);
+
+        document.body.classList.remove("auth-locked");
+
+        document.getElementById("loginScreen").style.display = "none";
+
+    } else {
+
+        console.log("No admin logged in");
+
+        document.body.classList.add("auth-locked");
+
+        document.getElementById("loginScreen").style.display = "flex";
+
+    }
+
+});
+
+// ======================================
+// ADMIN AUTH STATE END
+// ======================================
+
+</script>
+
+     
 <!-- =========================================
      ADMIN AUTHENTICATION END
      ========================================= -->
