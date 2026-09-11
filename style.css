@@ -1308,7 +1308,7 @@ body.auth-locked > *:not(#loginScreen) {
    =============================== */
 
 .sendBtn {
-    background: #25D366;
+    background: none;
     color: #ffffff;
     border: none;
     padding: 7px 12px;
@@ -1316,7 +1316,6 @@ body.auth-locked > *:not(#loginScreen) {
     font-size: 13px;
     font-weight: 600;
     cursor: pointer;
-    box-shadow: 0 2px 5px rgba(37, 211, 102, 0.35);
     transition: 0.2s;
 }
 
