@@ -1303,3 +1303,33 @@ body.auth-locked > *:not(#loginScreen) {
     background: #b91c1c;
 }
 
+/* ===============================
+   WHATSAPP SEND BUTTON
+   =============================== */
+
+.sendBtn {
+    background: #25D366;
+    color: #ffffff;
+    border: none;
+    padding: 7px 12px;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(37, 211, 102, 0.35);
+    transition: 0.2s;
+}
+
+.sendBtn i {
+    margin-right: 4px;
+    font-size: 14px;
+}
+
+.sendBtn:hover {
+    background: #20bd5a;
+    transform: translateY(-1px);
+}
+
+.sendBtn:active {
+    transform: scale(0.96);
+}
