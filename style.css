@@ -1297,3 +1297,51 @@ body.auth-locked > *:not(#loginScreen) {
 .logout-btn:hover {
     background: #b91c1c;
 }
+
+
+
+/* ===============================
+   HEADER ADMIN BUTTONS
+   =============================== */
+
+.adminButtons {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+.cloudBtn,
+.logoutBtn {
+    border: none;
+    padding: 8px 12px;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.cloudBtn {
+    background: #0f766e;
+    color: white;
+}
+
+.logoutBtn {
+    background: #dc2626;
+    color: white;
+}
+
+.cloudBtn:hover {
+    opacity: 0.9;
+}
+
+.logoutBtn:hover {
+    opacity: 0.9;
+}
+
+#cloudTestResult {
+    margin: 5px 0 0;
+    font-size: 12px;
+    text-align: right;
+}
