@@ -1309,7 +1309,7 @@ body.auth-locked > *:not(#loginScreen) {
 
 .sendBtn {
     background: none;
-    color: #ffffff;
+    color: #25D366;
     border: none;
     padding: 7px 12px;
     border-radius: 7px;
