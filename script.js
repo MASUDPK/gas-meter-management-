@@ -340,6 +340,196 @@ async function loadDataFromCloud() {
 
 
 // ======================================
+// Jamila Bhavan
+// Gas Meter Management System
+// RESTORE TABLE RENDER + DASHBOARD
+// ======================================
+
+
+// ======================================
+// RENDER CUSTOMER TABLE
+// ======================================
+
+function renderTable() {
+
+    if (!tableBody) {
+
+        console.error(
+            "❌ Customer table tbody not found!"
+        );
+
+        return;
+    }
+
+    tableBody.innerHTML = "";
+
+
+    customers.forEach(function(customer, index) {
+
+        const row = document.createElement("tr");
+
+        row.dataset.index = index;
+
+
+        row.innerHTML = `
+
+            <td>${customer.flat || "-"}</td>
+
+            <td>${customer.meter || "-"}</td>
+
+            <td>${customer.name || "-"}</td>
+
+            <td>${customer.mobile || "-"}</td>
+
+            <td>${customer.previous || 0}</td>
+
+            <td>${customer.current || 0}</td>
+
+            <td>${customer.unit || 0}</td>
+
+            <td>
+                ${Number(customer.bill || 0).toFixed(2)}
+            </td>
+
+            <td>
+                ${Number(customer.paid || 0).toFixed(2)}
+            </td>
+
+            <td>
+                ${Number(customer.due || 0).toFixed(2)}
+            </td>
+
+            <td>
+                ${customer.status || "Active"}
+            </td>
+
+            <td>
+
+                <button
+                    class="sendBtn"
+                    onclick="
+                        event.stopPropagation();
+                        sendCustomerWhatsApp(${index});
+                    "
+                >
+
+                    <i class="fab fa-whatsapp"></i>
+
+                    Send
+
+                </button>
+
+            </td>
+
+        `;
+
+
+        tableBody.appendChild(row);
+
+    });
+
+}
+
+
+// ======================================
+// UPDATE DASHBOARD
+// ======================================
+
+function updateDashboard() {
+
+    let totalUnit = 0;
+
+    let totalBill = 0;
+
+    let totalPaid = 0;
+
+    let totalDue = 0;
+
+
+    customers.forEach(function(customer) {
+
+        totalUnit +=
+            Number(customer.unit || 0);
+
+
+        totalBill +=
+            Number(customer.bill || 0);
+
+
+        totalPaid +=
+            Number(customer.paid || 0);
+
+
+        totalDue +=
+            Number(customer.due || 0);
+
+    });
+
+
+    const totalFlat =
+        document.getElementById("totalFlat");
+
+    const totalUnitElement =
+        document.getElementById("totalUnit");
+
+    const totalBillElement =
+        document.getElementById("totalBill");
+
+    const paidBillElement =
+        document.getElementById("paidBill");
+
+    const totalDueElement =
+        document.getElementById("totalDue");
+
+
+    if (totalFlat) {
+
+        totalFlat.innerText =
+            FLATS.length;
+
+    }
+
+
+    if (totalUnitElement) {
+
+        totalUnitElement.innerText =
+            totalUnit;
+
+    }
+
+
+    if (totalBillElement) {
+
+        totalBillElement.innerText =
+            totalBill.toFixed(2);
+
+    }
+
+
+    if (paidBillElement) {
+
+        paidBillElement.innerText =
+            totalPaid.toFixed(2);
+
+    }
+
+
+    if (totalDueElement) {
+
+        totalDueElement.innerText =
+            totalDue.toFixed(2);
+
+    }
+
+}
+
+
+// ======================================
+// END: RESTORE TABLE RENDER + DASHBOARD
+// ======================================
+
+
+// ======================================
 // STEP 3 — SAFE LOCAL → CLOUD MIGRATION END
 // ======================================
 // ======================================
