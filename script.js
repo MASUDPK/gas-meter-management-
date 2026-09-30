@@ -358,7 +358,7 @@ window.firebaseAuth.onAuthStateChanged(async function(user) {
 
 });
 
-```javascript
+
 // ======================================
 // Jamila Bhavan
 // Gas Meter Management System
@@ -737,7 +737,7 @@ document.getElementById("entryForm")
 // ======================================
 // PART - 3 END
 // ======================================
-```
+
 
 
 document.getElementById("entryForm")
