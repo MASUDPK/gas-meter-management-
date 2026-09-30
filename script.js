@@ -673,20 +673,96 @@ function loadCustomerToForm(index) {
 getElement("addCustomerBtn").onclick =
 function () {
 
-    const flat =
-        getElement("flatNo").value;
+    // ==================================================
+    // FIND CUSTOMER
+    // ==================================================
+
+    let index = selectedIndex;
 
 
-    const index =
-        customers.findIndex(
-            customer =>
-                customer.flat === flat
+    // ==================================================
+    // IF NO SELECTED CUSTOMER
+    // THEN USE FLAT NUMBER
+    // ==================================================
+
+    if (
+        index === -1 ||
+        !customers[index]
+    ) {
+
+        const flat =
+            getElement("flatNo").value
+                .trim()
+                .toUpperCase();
+
+
+        if (flat !== "") {
+
+            index =
+                customers.findIndex(
+                    customer =>
+                        String(customer.flat || "")
+                            .trim()
+                            .toUpperCase() === flat
+                );
+
+        }
+
+    }
+
+
+    // ==================================================
+    // IF STILL NOT FOUND
+    // ASK FOR FLAT NUMBER
+    // ==================================================
+
+    if (
+        index === -1 ||
+        !customers[index]
+    ) {
+
+        let flat =
+            prompt(
+                "Enter Flat Number (Example: A-2)"
+            );
+
+
+        if (!flat) {
+
+            return;
+
+        }
+
+
+        flat =
+            flat
+                .trim()
+                .toUpperCase();
+
+
+        index =
+            customers.findIndex(
+                customer =>
+                    String(customer.flat || "")
+                        .trim()
+                        .toUpperCase() === flat
+            );
+
+    }
+
+
+    // ==================================================
+    // FINAL CHECK
+    // ==================================================
+
+    if (
+        index === -1 ||
+        !customers[index]
+    ) {
+
+        alert(
+            "Flat data not found."
         );
-
-
-    if (index === -1) {
-
-        alert("Flat data not found.");
 
         return;
     }
@@ -695,6 +771,107 @@ function () {
     const customer =
         customers[index];
 
+
+    // ==================================================
+    // NEW ENTRY MODE
+    // ==================================================
+
+    selectedIndex = -1;
+
+
+    // ==================================================
+    // BASIC INFORMATION
+    // ==================================================
+
+    getElement("flatNo").value =
+        customer.flat || "";
+
+    getElement("meterNo").value =
+        customer.meter || "";
+
+    getElement("customerName").value =
+        customer.name || "";
+
+    getElement("mobileNumber").value =
+        customer.mobile || "";
+
+
+    // ==================================================
+    // VERY IMPORTANT
+    //
+    // OLD CURRENT → NEW PREVIOUS
+    // ==================================================
+
+    getElement("previousReading").value =
+        Number(
+            customer.current || 0
+        );
+
+
+    // ==================================================
+    // NEW CURRENT READING
+    //
+    // ALWAYS EMPTY
+    // ==================================================
+
+    getElement("currentReading").value =
+        "";
+
+
+    // ==================================================
+    // BILL SETTINGS
+    // ==================================================
+
+    getElement("gasRate").value =
+        GAS_RATE;
+
+    getElement("serviceCharge").value =
+        SERVICE_CHARGE;
+
+
+    // ==================================================
+    // RESET BILL DATA
+    // ==================================================
+
+    getElement("previousDue").value =
+        0;
+
+    getElement("discount").value =
+        0;
+
+    getElement("lateFee").value =
+        0;
+
+    getElement("receivedAmount").value =
+        0;
+
+
+    // ==================================================
+    // RESET CALCULATED VALUES
+    // ==================================================
+
+    getElement("totalAmount").value =
+        "0.00";
+
+    getElement("currentDue").value =
+        "0.00";
+
+
+    // ==================================================
+    // OPEN MODAL
+    // ==================================================
+
+    getElement("entryModal")
+        .style.display = "flex";
+
+
+    // ==================================================
+    // CALCULATE
+    // ==================================================
+
+    calculateBill();
+
+};
 
     // ==================================================
     // NEW ENTRY MODE
