@@ -721,17 +721,14 @@ function () {
 
 
     // ==================================================
-    // VERY IMPORTANT
+    // NEW ENTRY READING
+    //
     // OLD CURRENT → NEW PREVIOUS
+    // NEW CURRENT → EMPTY
     // ==================================================
 
     getElement("previousReading").value =
         Number(customer.current || 0);
-
-
-    // ==================================================
-    // NEW CURRENT READING
-    // ==================================================
 
     getElement("currentReading").value =
         "";
@@ -882,7 +879,6 @@ function calculateBill() {
     getElement("totalAmount").value =
         total.toFixed(2);
 
-
     getElement("currentDue").value =
         due.toFixed(2);
 
@@ -976,26 +972,37 @@ getElement("entryForm")
         // ===============================
 
         customers[index].name =
-            getElement("customerName").value.trim();
+            getElement("customerName")
+            .value
+            .trim();
 
 
         customers[index].mobile =
-            getElement("mobileNumber").value.trim();
+            getElement("mobileNumber")
+            .value
+            .trim();
 
 
-        // ===============================
+        // ==================================================
         // READING
-        // ===============================
+        //
+        // SAVE EXACTLY WHAT IS IN FORM
+        //
+        // Previous = New Entry Previous
+        // Current  = New Current
+        // ==================================================
 
         customers[index].previous =
             Number(
-                getElement("previousReading").value || 0
+                getElement("previousReading")
+                .value || 0
             );
 
 
         customers[index].current =
             Number(
-                getElement("currentReading").value || 0
+                getElement("currentReading")
+                .value || 0
             );
 
 
@@ -1005,7 +1012,6 @@ getElement("entryForm")
 
         customers[index].unit =
             result.unit;
-
 
         customers[index].bill =
             result.total;
@@ -1017,7 +1023,8 @@ getElement("entryForm")
 
         customers[index].paid =
             Number(
-                getElement("receivedAmount").value || 0
+                getElement("receivedAmount")
+                .value || 0
             );
 
 
@@ -1041,19 +1048,22 @@ getElement("entryForm")
 
         customers[index].previousDue =
             Number(
-                getElement("previousDue").value || 0
+                getElement("previousDue")
+                .value || 0
             );
 
 
         customers[index].discount =
             Number(
-                getElement("discount").value || 0
+                getElement("discount")
+                .value || 0
             );
 
 
         customers[index].lateFee =
             Number(
-                getElement("lateFee").value || 0
+                getElement("lateFee")
+                .value || 0
             );
 
 
@@ -1091,7 +1101,11 @@ getElement("entryForm")
 
 
 // ==================================================
-// LOAD SELECTED FLAT DATA
+// LOAD SELECTED FLAT DATA — UPDATE MODE
+//
+// UPDATE:
+// Previous = পুরনো Previous
+// Current  = পুরনো Current
 // ==================================================
 
 function loadUpdateCustomer() {
@@ -1123,7 +1137,10 @@ function loadUpdateCustomer() {
 
 
     // ===============================
-    // LOAD DATA
+    // LOAD OLD DATA
+    //
+    // এখানে Previous এবং Current
+    // আগের মতোই থাকবে
     // ===============================
 
     loadCustomerToForm(index);
@@ -1150,7 +1167,6 @@ getElement("flatNo").addEventListener(
 
     }
 );
-
 
 // ==================================================
 // UPDATE EXISTING ENTRY
