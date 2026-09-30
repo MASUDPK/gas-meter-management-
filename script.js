@@ -1052,7 +1052,8 @@ function () {
 // UPDATE BUTTON
 // ===============================
 
-
+document.getElementById("updateBtn")
+.onclick = function () {
 
    
 
