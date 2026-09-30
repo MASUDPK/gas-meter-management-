@@ -358,408 +358,14 @@ window.firebaseAuth.onAuthStateChanged(async function(user) {
 
 });
 
-// ======================================
-// STEP 3 — CLOUD LOAD AFTER LOGIN END
-// ======================================
-// ======================================
-// STEP 1 — CLOUD LOAD END
-// ======================================
-
-// ===============================
-// LOAD FLAT LIST
-// ===============================
-
-
-function loadFlats(){
-
-
-flatSelect.innerHTML="";
-
-
-FLATS.forEach(flat=>{
-
-
-let option =
-document.createElement("option");
-
-
-option.value = flat;
-
-
-option.textContent = flat;
-
-
-flatSelect.appendChild(option);
-
-
-});
-
-
-
-meterInput.value =
-METERS[flatSelect.value];
-
-
-}
-
-
-
-
-// ===============================
-// FLAT CHANGE EVENT
-// ===============================
-
-
-flatSelect.addEventListener(
-
-"change",
-
-function(){
-
-
-meterInput.value =
-METERS[this.value];
-
-
-}
-
-);
-
-
-
-// ===============================
-// CREATE INITIAL 28 DATA
-// ===============================
-
-
-function createDefaultCustomers(){
-
-
-if(customers.length > 0){
-
-return;
-
-}
-
-
-
-FLATS.forEach(flat=>{
-
-
-customers.push({
-
-
-flat:flat,
-
-meter:METERS[flat],
-
-name:"",
-
-mobile:"",
-
-previous:0,
-
-current:0,
-
-unit:0,
-
-bill:0,
-
-paid:0,
-
-due:0,
-
-status:"Active"
-
-
-});
-
-
-});
-
-
-
-saveData();
-
-
-}
-
-
-// ===============================
-// START SYSTEM
-// ===============================
-
-
-createDefaultCustomers();
-
-
-loadFlats();
-
-// ======================================
-// Jamila Bhavan
-// Gas Meter Management System
-// script.js Version 2.0
-// Part - 2
-// ======================================
-
-
-
-// ===============================
-// RENDER CUSTOMER TABLE
-// ===============================
-
-function renderTable() {
-
-    tableBody.innerHTML = "";
-
-    customers.forEach((customer, index) => {
-
-        const row =
-            document.createElement("tr");
-
-        row.dataset.index = index;
-
-        row.innerHTML = `
-
-            <td>${customer.flat || "-"}</td>
-
-            <td>${customer.meter || "-"}</td>
-
-            <td>${customer.name || "-"}</td>
-
-            <td>${customer.mobile || "-"}</td>
-
-            <td>${customer.previous || 0}</td>
-
-            <td>${customer.current || 0}</td>
-
-            <td>${customer.unit || 0}</td>
-
-            <td>
-                ${Number(customer.bill || 0).toFixed(2)}
-            </td>
-
-            <td>
-                ${Number(customer.paid || 0).toFixed(2)}
-            </td>
-
-            <td>
-                ${Number(customer.due || 0).toFixed(2)}
-            </td>
-
-            <td>
-                ${customer.status || "Active"}
-            </td>
-
-            <td>
-
-                <button
-                    class="sendBtn"
-                    onclick="event.stopPropagation(); sendCustomerWhatsApp(${index})">
-
-                    <i class="fab fa-whatsapp"></i>
-
-                    Send
-
-                </button>
-
-            </td>
-
-        `;
-
-        tableBody.appendChild(row);
-
-    });
-
-}
-
-// ===============================
-// UPDATE DASHBOARD
-// ===============================
-
-
-function updateDashboard(){
-
-
-
-let totalUnit = 0;
-
-let totalBill = 0;
-
-let totalPaid = 0;
-
-let totalDue = 0;
-
-
-
-customers.forEach(customer=>{
-
-
-totalUnit += Number(customer.unit);
-
-
-totalBill += Number(customer.bill);
-
-
-totalPaid += Number(customer.paid);
-
-
-totalDue += Number(customer.due);
-
-
-
-});
-
-
-
-
-
-document.getElementById("totalFlat").innerText =
-
-FLATS.length;
-
-
-
-document.getElementById("totalUnit").innerText =
-
-totalUnit;
-
-
-
-document.getElementById("totalBill").innerText =
-
-totalBill.toFixed(2);
-
-
-
-document.getElementById("paidBill").innerText =
-
-totalPaid.toFixed(2);
-
-
-
-document.getElementById("dueBill").innerText =
-
-totalDue.toFixed(2);
-
-
-
-}
-
-
-
-
-
-// ==========================================
-// FINAL SEARCH - COMPUTER + MOBILE
-// ==========================================
-
-const searchBox = document.getElementById("searchBox");
-
-if (searchBox) {
-
-    searchBox.oninput = function () {
-
-        const searchValue =
-            searchBox.value.trim().toLowerCase();
-
-        const tableRows =
-            document.querySelectorAll(
-                "#customerTable tbody tr"
-            );
-
-        tableRows.forEach(function(row) {
-
-            // Mobile detail row
-            if (row.classList.contains("mobile-details")) {
-                row.remove();
-                return;
-            }
-
-            const rowText =
-                row.textContent.toLowerCase();
-
-            if (searchValue === "") {
-
-                row.style.display = "";
-
-            }
-            else if (rowText.includes(searchValue)) {
-
-                row.style.display = "";
-
-            }
-            else {
-
-                row.style.display = "none";
-
-            }
-
-        });
-
-    };
-
-}
-// ===============================
-// SELECT CUSTOMER ROW
-// ===============================
-
-// ===============================
-// SELECT CUSTOMER ROW
-// ===============================
-
-document.querySelector("#customerTable tbody")
-.addEventListener("click", function(e){
-
-    // WhatsApp button হলে row select বন্ধ
-    if(e.target.closest(".sendBtn")){
-        return;
-    }
-
-    let row = e.target.closest("tr");
-
-    if(!row){
-        return;
-    }
-
-    // আগের selected row সরানো
-    document
-        .querySelectorAll("#customerTable tbody tr")
-        .forEach(function(item){
-            item.classList.remove("selected-row");
-        });
-
-    // নতুন row select
-    row.classList.add("selected-row");
-
-    // Selected customer index
-    selectedIndex = Number(row.dataset.index);
-
-    console.log(
-        "Selected Flat:",
-        customers[selectedIndex].flat
-    );
-
-});
-
-
-// ===============================
-// INITIAL LOAD
-// ===============================
-
-
-renderTable();
-
-updateDashboard();
-
+```javascript
 // ======================================
 // Jamila Bhavan
 // Gas Meter Management System
 // script.js Version 2.0
 // Part - 3
-// New Entry & Bill Calculation
+// NEW ENTRY + AUTOMATIC PREVIOUS READING
 // ======================================
-
 
 
 // ===============================
@@ -769,212 +375,369 @@ updateDashboard();
 let selectedIndex = -1;
 
 
-
-
 // ===============================
-// OPEN ENTRY MODAL
+// OPEN NEW ENTRY MODAL
 // ===============================
 
+document.getElementById("addCustomerBtn").onclick = function () {
 
-document.getElementById("addCustomerBtn")
-.onclick = function(){
+    selectedIndex = -1;
+
+    const flat =
+        document.getElementById("flatNo").value;
+
+    const index =
+        customers.findIndex(
+            customer => customer.flat === flat
+        );
+
+    if (index === -1) {
+        alert("Flat data not found");
+        return;
+    }
+
+    const customer = customers[index];
+
+    // ===============================
+    // LOAD BASIC CUSTOMER INFORMATION
+    // ===============================
+
+    document.getElementById("flatNo").value =
+        customer.flat;
+
+    document.getElementById("meterNo").value =
+        customer.meter || "";
+
+    document.getElementById("customerName").value =
+        customer.name || "";
+
+    document.getElementById("mobileNumber").value =
+        customer.mobile || "";
 
 
-selectedIndex = -1;
+    // ==================================================
+    // IMPORTANT:
+    // OLD CURRENT → NEW PREVIOUS
+    // ==================================================
+
+    document.getElementById("previousReading").value =
+        Number(customer.current || 0);
 
 
-document.getElementById("entryModal")
-.style.display = "flex";
+    // ===============================
+    // NEW CURRENT READING EMPTY
+    // ===============================
+
+    document.getElementById("currentReading").value = "";
 
 
+    // ===============================
+    // BILL SETTINGS
+    // ===============================
+
+    document.getElementById("gasRate").value =
+        GAS_RATE;
+
+    document.getElementById("serviceCharge").value =
+        SERVICE_CHARGE;
+
+
+    document.getElementById("previousDue").value =
+        0;
+
+    document.getElementById("discount").value =
+        0;
+
+    document.getElementById("lateFee").value =
+        0;
+
+    document.getElementById("receivedAmount").value =
+        0;
+
+
+    document.getElementById("totalAmount").value =
+        "0.00";
+
+    document.getElementById("currentDue").value =
+        "0.00";
+
+
+    // ===============================
+    // OPEN MODAL
+    // ===============================
+
+    document.getElementById("entryModal")
+        .style.display = "flex";
+
+
+    calculateBill();
 
 };
-
-
-
-
 
 
 // ===============================
 // AUTO BILL CALCULATION
 // ===============================
 
+function calculateBill() {
 
-function calculateBill(){
+    let previous = Number(
+        document.getElementById("previousReading").value || 0
+    );
 
+    let current = Number(
+        document.getElementById("currentReading").value || 0
+    );
 
+    let rate = Number(
+        document.getElementById("gasRate").value || GAS_RATE
+    );
 
-let previous = Number(
+    let service = Number(
+        document.getElementById("serviceCharge").value || 0
+    );
 
-document.getElementById("previousReading").value || 0
+    let previousDue = Number(
+        document.getElementById("previousDue").value || 0
+    );
 
-);
+    let discount = Number(
+        document.getElementById("discount").value || 0
+    );
 
+    let lateFee = Number(
+        document.getElementById("lateFee").value || 0
+    );
 
-
-let current = Number(
-
-document.getElementById("currentReading").value || 0
-
-);
-
-
-
-let rate = Number(
-
-document.getElementById("gasRate").value || GAS_RATE
-
-);
-
-
-
-let service = Number(
-
-document.getElementById("serviceCharge").value || 0
-
-);
-
+    let received = Number(
+        document.getElementById("receivedAmount").value || 0
+    );
 
 
-let previousDue = Number(
+    // ===============================
+    // UNIT CALCULATION
+    // ===============================
 
-document.getElementById("previousDue").value || 0
-
-);
-
-
-
-let discount = Number(
-
-document.getElementById("discount").value || 0
-
-);
+    let unit = current - previous;
 
 
-
-let lateFee = Number(
-
-document.getElementById("lateFee").value || 0
-
-);
+    if (unit < 0) {
+        unit = 0;
+    }
 
 
+    // ===============================
+    // TOTAL BILL
+    // ===============================
 
-let received = Number(
-
-document.getElementById("receivedAmount").value || 0
-
-);
-
-
-
-
-
-let unit = current - previous;
+    let total =
+        (unit * rate)
+        + service
+        + previousDue
+        + lateFee
+        - discount;
 
 
+    // ===============================
+    // CURRENT DUE
+    // ===============================
 
-if(unit < 0){
+    let due =
+        total - received;
 
-unit = 0;
+
+    // ===============================
+    // DISPLAY
+    // ===============================
+
+    document.getElementById("totalAmount").value =
+        total.toFixed(2);
+
+    document.getElementById("currentDue").value =
+        due.toFixed(2);
+
+
+    return {
+        unit: unit,
+        total: total,
+        due: due
+    };
 
 }
 
 
-
-
-
-let total =
-
-(unit * rate)
-
-+ service
-
-+ previousDue
-
-+ lateFee
-
-- discount;
-
-
-
-
-
-let due = total - received;
-
-
-
-
-
-document.getElementById("totalAmount").value =
-
-total.toFixed(2);
-
-
-
-document.getElementById("currentDue").value =
-
-due.toFixed(2);
-
-
-
-return {
-
-unit,
-
-total,
-
-due
-
-};
-
-
-}
-
-
-
-
-
-
 // ===============================
-// AUTO CALCULATE WHEN INPUT CHANGE
+// AUTO CALCULATE ON INPUT
 // ===============================
-
 
 [
-"previousReading",
-"currentReading",
-"gasRate",
-"serviceCharge",
-"previousDue",
-"discount",
-"lateFee",
-"receivedAmount"
+    "previousReading",
+    "currentReading",
+    "gasRate",
+    "serviceCharge",
+    "previousDue",
+    "discount",
+    "lateFee",
+    "receivedAmount"
 
-].forEach(id=>{
+].forEach(function (id) {
 
+    const element =
+        document.getElementById(id);
 
-document.getElementById(id)
+    if (element) {
 
-.addEventListener(
+        element.addEventListener(
+            "input",
+            calculateBill
+        );
 
-"input",
-
-calculateBill
-
-);
-
+    }
 
 });
 
 
-
-
-
-
 // ===============================
-// SAVE ENTRY
+// SAVE NEW ENTRY
 // ===============================
+
+document.getElementById("entryForm")
+.addEventListener(
+    "submit",
+    function (e) {
+
+        e.preventDefault();
+
+
+        const flat =
+            document.getElementById("flatNo").value;
+
+
+        const index =
+            customers.findIndex(
+                customer => customer.flat === flat
+            );
+
+
+        if (index === -1) {
+
+            alert("Flat not found");
+
+            return;
+        }
+
+
+        const result =
+            calculateBill();
+
+
+        // ===============================
+        // CUSTOMER INFORMATION
+        // ===============================
+
+        customers[index].name =
+            document.getElementById("customerName").value;
+
+        customers[index].mobile =
+            document.getElementById("mobileNumber").value;
+
+
+        // ===============================
+        // READING
+        // ===============================
+
+        customers[index].previous =
+            Number(
+                document.getElementById("previousReading").value || 0
+            );
+
+
+        customers[index].current =
+            Number(
+                document.getElementById("currentReading").value || 0
+            );
+
+
+        // ===============================
+        // BILL
+        // ===============================
+
+        customers[index].unit =
+            result.unit;
+
+        customers[index].bill =
+            result.total;
+
+
+        customers[index].paid =
+            Number(
+                document.getElementById("receivedAmount").value || 0
+            );
+
+
+        customers[index].due =
+            result.due;
+
+
+        customers[index].status =
+            result.due <= 0
+                ? "Paid"
+                : "Due";
+
+
+        // ===============================
+        // SAVE EXTRA BILL INFORMATION
+        // ===============================
+
+        customers[index].previousDue =
+            Number(
+                document.getElementById("previousDue").value || 0
+            );
+
+        customers[index].discount =
+            Number(
+                document.getElementById("discount").value || 0
+            );
+
+        customers[index].lateFee =
+            Number(
+                document.getElementById("lateFee").value || 0
+            );
+
+
+        // ===============================
+        // SAVE
+        // LOCAL + FIREBASE
+        // ===============================
+
+        saveData();
+
+
+        renderTable();
+
+        updateDashboard();
+
+
+        alert(
+            "Entry Saved Successfully"
+        );
+
+
+        // ===============================
+        // CLOSE MODAL
+        // ===============================
+
+        document.getElementById("entryModal")
+            .style.display = "none";
+
+    }
+);
+
+
+// ======================================
+// PART - 3 END
+// ======================================
+```
 
 
 document.getElementById("entryForm")
