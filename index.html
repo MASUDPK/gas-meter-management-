@@ -1,1 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jamila Bhavan - Gas Meter Management</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
 
+  <!-- Top Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <h1>🔥 Jamila Bhavan</h1>
+        <p>Gas Meter Management System</p>
+      </div>
+
+      <!-- Month Selector & Controls -->
+      <div class="month-bar">
+        <button id="prevMonthBtn" class="btn btn-outline" title="Previous Month">◀</button>
+        <div class="current-month-badge" id="currentMonthLabel">September 2026</div>
+        <button id="nextMonthBtn" class="btn btn-outline" title="Next Month">▶</button>
+      </div>
+
+      <div class="header-actions">
+        <button id="printReportBtn" class="btn btn-secondary">🖨️ A4 Print</button>
+        <button id="backupBtn" class="btn btn-secondary">💾 Backup / Restore</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <!-- Dashboard Stats Cards -->
+    <section class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-icon">🏢</span>
+        <div class="stat-info">
+          <h3>Total Flats</h3>
+          <p id="statTotalFlats">28</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">📊</span>
+        <div class="stat-info">
+          <h3>Total Units</h3>
+          <p id="statTotalUnits">0.00</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">💰</span>
+        <div class="stat-info">
+          <h3>Total Billed</h3>
+          <p id="statTotalBill">৳0.00</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">✅</span>
+        <div class="stat-info">
+          <h3>Collected</h3>
+          <p id="statTotalPaid">৳0.00</p>
+        </div>
+      </div>
+      <div class="stat-card highlight-due">
+        <span class="stat-icon">⚠️</span>
+        <div class="stat-info">
+          <h3>Outstanding Due</h3>
+          <p id="statTotalDue">৳0.00</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filter & Search Toolbar -->
+    <section class="table-toolbar">
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search Flat (e.g. A-8) or Tenant...">
+      </div>
+      <div class="filter-group">
+        <select id="statusFilter">
+          <option value="ALL">All Status</option>
+          <option value="DUE">With Due</option>
+          <option value="PAID">Fully Paid</option>
+        </select>
+        <span class="flat-count-badge" id="flatCountBadge">Showing: 28 flats</span>
+      </div>
+    </section>
+
+    <!-- Customer Flats Grid / Table -->
+    <section class="table-container">
+      <table class="bill-table" id="customerTable">
+        <thead>
+          <tr>
+            <th>Flat</th>
+            <th>Tenant & Mobile</th>
+            <th>Meter No</th>
+            <th>Readings (Prev / Curr)</th>
+            <th>Unit</th>
+            <th>Gas Bill</th>
+            <th>Prev Due</th>
+            <th>Total Bill</th>
+            <th>Paid</th>
+            <th>Current Due</th>
+            <th class="actions-col">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="customerTableBody">
+          <!-- Rendered dynamically via JavaScript -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <!-- Entry / Edit Reading Modal -->
+  <div class="modal-overlay" id="entryModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 id="modalTitle">Meter Entry - Flat A-8</h2>
+        <button class="modal-close" onclick="closeModal('entryModal')">&times;</button>
+      </div>
+      <form id="entryForm">
+        <input type="hidden" id="entryFlat">
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>Tenant Name</label>
+            <input type="text" id="entryName" placeholder="Tenant name">
+          </div>
+          <div class="form-group">
+            <label>Mobile Number</label>
+            <input type="text" id="entryMobile" placeholder="017xxxxxxxx">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Meter Number</label>
+            <input type="text" id="entryMeter" readonly>
+          </div>
+          <div class="form-group">
+            <label>Gas Rate (৳ per unit)</label>
+            <input type="number" step="any" id="entryGasRate" value="290.0">
+          </div>
+        </div>
+
+        <div class="form-row reading-row">
+          <div class="form-group">
+            <label>Previous Reading</label>
+            <input type="number" step="any" id="entryPrevious" placeholder="0.0">
+          </div>
+          <div class="form-group">
+            <label>Current Reading</label>
+            <input type="number" step="any" id="entryCurrent" placeholder="0.0">
+          </div>
+          <div class="form-group">
+            <label>Calculated Unit</label>
+            <input type="number" step="any" id="entryUnit" readonly>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Previous Due (৳)</label>
+            <input type="number" step="any" id="entryPrevDue" value="0.0">
+          </div>
+          <div class="form-group">
+            <label>Service Charge (৳)</label>
+            <input type="number" step="any" id="entryServiceCharge" value="0.0">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Late Fee (৳)</label>
+            <input type="number" step="any" id="entryLateFee" value="0.0">
+          </div>
+          <div class="form-group">
+            <label>Discount (৳)</label>
+            <input type="number" step="any" id="entryDiscount" value="0.0">
+          </div>
+        </div>
+
+        <!-- Real-time calculation summary -->
+        <div class="bill-summary-box">
+          <div class="summary-line">
+            <span>Gas Bill:</span>
+            <strong id="calcGasBill">৳0.00</strong>
+          </div>
+          <div class="summary-line highlight-total">
+            <span>Total Bill:</span>
+            <strong id="calcTotalBill">৳0.00</strong>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="closeModal('entryModal')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Entry</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Payment Modal -->
+  <div class="modal-overlay" id="paymentModal">
+    <div class="modal-card modal-sm">
+      <div class="modal-header">
+        <h2 id="payModalTitle">Record Payment</h2>
+        <button class="modal-close" onclick="closeModal('paymentModal')">&times;</button>
+      </div>
+      <form id="paymentForm">
+        <input type="hidden" id="payFlat">
+        <div class="form-group">
+          <label>Total Bill Amount</label>
+          <input type="text" id="payTotalBill" readonly>
+        </div>
+        <div class="form-group">
+          <label>Already Paid</label>
+          <input type="text" id="payAlreadyPaid" readonly>
+        </div>
+        <div class="form-group">
+          <label>Remaining Current Due</label>
+          <input type="text" id="payCurrentDue" readonly>
+        </div>
+        <div class="form-group">
+          <label>Receive Payment Now (৳)</label>
+          <input type="number" step="any" id="payAmountInput" required min="1" placeholder="Enter amount">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="closeModal('paymentModal')">Cancel</button>
+          <button type="submit" class="btn btn-success">Confirm Payment</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Backup / Restore Modal -->
+  <div class="modal-overlay" id="backupModal">
+    <div class="modal-card modal-sm">
+      <div class="modal-header">
+        <h2>Data Backup & Restore</h2>
+        <button class="modal-close" onclick="closeModal('backupModal')">&times;</button>
+      </div>
+      <div class="modal-body-p">
+        <p>Your data is stored safely in this browser. You can export a JSON backup file to move data between computers or restore anytime.</p>
+        <div style="display:flex; flex-direction:column; gap:12px; margin-top:16px;">
+          <button id="exportDataBtn" class="btn btn-primary">📥 Download Backup (JSON)</button>
+          <label class="btn btn-outline" style="text-align:center; cursor:pointer;">
+            📤 Restore from Backup File
+            <input type="file" id="importFileInput" accept=".json" style="display:none;">
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Printable A4 Bill View -->
+  <div id="printArea" class="print-only">
+    <div class="print-header">
+      <h2>JAMILA BHAVAN</h2>
+      <h3>MONTHLY GAS METER BILL SHEET</h3>
+      <p id="printMonthText">Month: September 2026</p>
+    </div>
+    <table class="print-table" id="printTable">
+      <!-- Injected during print -->
+    </table>
+    <div class="print-footer">
+      <div>Prepared By: ___________________</div>
+      <div>Manager Signature: ___________________</div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
