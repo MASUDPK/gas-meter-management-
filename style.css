@@ -1,0 +1,479 @@
+/* Jamila Bhavan Theme & Material 3 Styling */
+:root {
+  --primary: #1565C0;
+  --primary-dark: #0D47A1;
+  --primary-light: #E3F2FD;
+  --secondary: #455A64;
+  --success: #2E7D32;
+  --warning: #F57F17;
+  --danger: #D32F2F;
+  --bg: #F8FAFC;
+  --card-bg: #FFFFFF;
+  --text: #1E293B;
+  --text-muted: #64748B;
+  --border: #E2E8F0;
+  --radius: 12px;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* App Header */
+.app-header {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #FFFFFF;
+  padding: 16px 24px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.header-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.brand h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand p {
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+/* Month Selector */
+.month-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 6px 12px;
+  border-radius: 30px;
+  backdrop-filter: blur(8px);
+}
+
+.current-month-badge {
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 4px 12px;
+  min-width: 160px;
+  text-align: center;
+}
+
+.header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Buttons */
+.btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: #fff;
+}
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+}
+
+.btn-secondary {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.4);
+}
+.btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.35);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn-outline:hover {
+  background-color: var(--bg);
+}
+
+.btn-success {
+  background-color: var(--success);
+  color: #fff;
+}
+
+.btn-sm {
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  border-radius: 6px;
+}
+
+.btn-whatsapp {
+  background-color: #25D366;
+  color: #fff;
+}
+.btn-whatsapp:hover {
+  background-color: #1EBE5D;
+}
+
+/* Main Content */
+.main-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  width: 100%;
+  flex: 1;
+}
+
+/* Stats Cards */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid var(--border);
+}
+
+.stat-card.highlight-due {
+  border-left: 5px solid var(--danger);
+}
+
+.stat-icon {
+  font-size: 2rem;
+  background: var(--primary-light);
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+}
+
+.stat-info h3 {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.stat-info p {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-top: 4px;
+}
+
+/* Toolbar */
+.table-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.search-box input {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  width: 280px;
+  font-size: 0.9rem;
+  background: #fff;
+}
+
+.search-box input:focus {
+  outline: 2px solid var(--primary);
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.filter-group select {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #fff;
+  font-size: 0.9rem;
+}
+
+.flat-count-badge {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* Table Container */
+.table-container {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  overflow-x: auto;
+}
+
+.bill-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.bill-table th {
+  background: #F1F5F9;
+  padding: 14px 16px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--border);
+  white-space: nowrap;
+}
+
+.bill-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+.bill-table tr:hover {
+  background-color: #F8FAFC;
+}
+
+.flat-pill {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 700;
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.actions-col {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.action-btns {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.text-danger {
+  color: var(--danger);
+  font-weight: 700;
+}
+
+.text-success {
+  color: var(--success);
+  font-weight: 700;
+}
+
+/* Modals */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-card {
+  background: #fff;
+  border-radius: var(--radius);
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+  padding: 24px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-sm {
+  max-width: 440px;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.modal-header h2 {
+  font-size: 1.25rem;
+  color: var(--text);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-muted);
+}
+
+.form-row {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.form-group input {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.form-group input:focus {
+  outline: 2px solid var(--primary);
+}
+
+.form-group input[readonly] {
+  background-color: #F1F5F9;
+}
+
+.bill-summary-box {
+  background: #F8FAFC;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+  margin: 16px 0;
+}
+
+.summary-line {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+}
+
+.summary-line.highlight-total {
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+  margin-top: 8px;
+  font-size: 1.15rem;
+  color: var(--primary);
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+/* Print CSS */
+.print-only {
+  display: none;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #printArea, #printArea * {
+    visibility: visible;
+  }
+  #printArea {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+  }
+  .print-header {
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #000;
+    padding-bottom: 10px;
+  }
+  .print-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11pt;
+  }
+  .print-table th, .print-table td {
+    border: 1px solid #000;
+    padding: 6px 8px;
+    text-align: left;
+  }
+  .print-footer {
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12pt;
+  }
+}
